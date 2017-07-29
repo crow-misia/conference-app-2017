@@ -4,6 +4,7 @@ import com.sys1yagi.kmockito.invoked
 import com.sys1yagi.kmockito.mock
 import com.sys1yagi.kmockito.verify
 import io.github.droidkaigi.confsched2017.model.Contributor
+import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.reactivex.Single
 import org.junit.Test
 import org.mockito.Mockito.never
@@ -13,13 +14,13 @@ class ContributorsRepositoryTest {
 
     private companion object {
         val CONTRIBUTORS = listOf(
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Alice"
                 },
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Bob"
                 },
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Charlie"
                 }
         )
@@ -70,7 +71,7 @@ class ContributorsRepositoryTest {
     fun findAllFromLocalDataSourceWhenNotDirty() {
         localDataSource.findAll().invoked.thenReturn(Single.just(CONTRIBUTORS))
         remoteDataSource.findAll().invoked.thenReturn(Single.just(listOf()))
-        repository.setDirty(false)
+        repository.dirty = false
 
         repository.findAll().test().run {
             assertNoErrors()
@@ -84,7 +85,7 @@ class ContributorsRepositoryTest {
     fun findAllFromRemoteDataSourceWhenLocalDataSourceReturnsEmptyResult() {
         localDataSource.findAll().invoked.thenReturn(Single.just(listOf()))
         remoteDataSource.findAll().invoked.thenReturn(Single.just(CONTRIBUTORS))
-        repository.setDirty(false)
+        repository.dirty = false
 
         repository.findAll().test().run {
             assertNoErrors()

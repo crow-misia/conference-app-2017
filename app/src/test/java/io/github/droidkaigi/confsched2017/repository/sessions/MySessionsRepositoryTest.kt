@@ -51,7 +51,7 @@ class MySessionsRepositoryTest {
          // check if session is cached
         repository.findAll().test().run {
             assertNoErrors()
-            assertResult(listOf(MySession(session)))
+            assertResult(listOf(MySession(session = session)))
             assertComplete()
             localDataSource.verify(Mockito.never()).findAll()
         }
@@ -77,7 +77,7 @@ class MySessionsRepositoryTest {
         // check if cached session1 is deleted
         repository.findAll().test().run {
             assertNoErrors()
-            assertResult(listOf(MySession(session2)))
+            assertResult(listOf(MySession(session = session2)))
             assertComplete()
         }
     }

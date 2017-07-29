@@ -41,9 +41,7 @@ class ContributorsLocalDataSourceTest {
     @Test
     fun findAllWhenNotEmpty() {
         ormaDatabase.apply {
-            insertIntoContributor(Contributor().apply {
-                name = "Alice"
-            })
+            insertIntoContributor(Contributor("Alice"))
         }.let(::ContributorsLocalDataSource).findAll().test().run {
             await(10, TimeUnit.SECONDS).should be true
             assertNoErrors()
@@ -57,12 +55,8 @@ class ContributorsLocalDataSourceTest {
     @Ignore("unstable test :(")
     fun updateAllAsyncAsInsert() {
         ContributorsLocalDataSource(ormaDatabase).updateAllAsync(listOf(
-                Contributor().apply {
-                    name = "Alice"
-                },
-                Contributor().apply {
-                    name = "Bob"
-                }))
+                Contributor("Alice"),
+                Contributor("Bob")))
         schedulerRule.testScheduler.triggerActions()
 
         ormaDatabase.selectFromContributor().toList().run {
@@ -75,15 +69,9 @@ class ContributorsLocalDataSourceTest {
     @Test
     fun updateAllAsyncAsUpdate() {
         ormaDatabase.apply {
-            insertIntoContributor(Contributor().apply {
-                name = "Alice"
-                contributions = 10
-            })
+            insertIntoContributor(Contributor(name = "Alice", contributions = 10))
         }.let(::ContributorsLocalDataSource).updateAllAsync(listOf(
-                Contributor().apply {
-                    name = "Alice"
-                    contributions = 100
-                }
+                Contributor(name = "Alice", contributions = 100)
         ))
         schedulerRule.testScheduler.triggerActions()
 

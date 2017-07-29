@@ -5,6 +5,7 @@ import com.sys1yagi.kmockito.mock
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
 import io.github.droidkaigi.confsched2017.model.Contributor
+import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.github.droidkaigi.confsched2017.util.RxTestSchedulerRule
 import io.reactivex.Single
 import org.junit.ClassRule
@@ -22,8 +23,8 @@ class ContributorsRemoteDataSourceTest {
 
     @Test
     fun findAll() {
-        client.contributors.invoked.thenReturn(Single.just(listOf(
-                Contributor().apply {
+        client.contributors().invoked.thenReturn(Single.just(listOf(
+                DummyCreator.newContributor(0).apply {
                     name = "Alice"
                 })))
 

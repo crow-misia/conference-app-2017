@@ -6,6 +6,7 @@ import com.sys1yagi.kmockito.verify
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
 import io.github.droidkaigi.confsched2017.model.Session
+import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.assertj.core.api.Assertions.assertThat
@@ -43,7 +44,7 @@ class SessionsRepositoryTest {
                     SessionsLocalDataSource(createOrmaDatabase()),
                     SessionsRemoteDataSource(mock())
             )
-            repository.cachedSessions = mapOf(0 to Session())
+            repository.cachedSessions = mapOf(0 to createSession(0))
             repository.setIdDirty(true)
 
             assertThat(repository.hasCacheSessions()).isFalse()
@@ -55,7 +56,7 @@ class SessionsRepositoryTest {
                     SessionsLocalDataSource(createOrmaDatabase()),
                     SessionsRemoteDataSource(mock())
             )
-            repository.cachedSessions = mapOf(0 to Session())
+            repository.cachedSessions = mapOf(0 to createSession(0))
             repository.setIdDirty(false)
 
             assertThat(repository.hasCacheSessions()).isTrue()
@@ -64,7 +65,7 @@ class SessionsRepositoryTest {
 
     @Test
     fun findAllRemoteRequestAndLocalCache() {
-        val sessions = listOf(Session())
+        val sessions = listOf(createSession(0))
         val client = mockDroidKaigiClient(sessions)
         val ormaDatabase = mock<OrmaDatabase>().apply {
             transactionAsCompletable(any()).invoked.thenReturn(Completable.complete())
@@ -103,7 +104,7 @@ class SessionsRepositoryTest {
 
     @Test
     fun findAllLocalCache() {
-        val sessions = listOf(Session())
+        val sessions = listOf(createSession(0))
         val client = mockDroidKaigiClient(sessions)
         val cachedSessions: Map<Int, Session> = mock()
 
@@ -156,7 +157,7 @@ class SessionsRepositoryTest {
                     SessionsLocalDataSource(createOrmaDatabase()),
                     SessionsRemoteDataSource(mock())
             )
-            repository.cachedSessions = mapOf(1 to Session())
+            repository.cachedSessions = mapOf(1 to createSession(0))
             repository.setIdDirty(false)
 
             assertThat(repository.hasCacheSession(0)).isFalse()
@@ -168,7 +169,7 @@ class SessionsRepositoryTest {
                     SessionsLocalDataSource(createOrmaDatabase()),
                     SessionsRemoteDataSource(mock())
             )
-            repository.cachedSessions = mapOf(1 to Session())
+            repository.cachedSessions = mapOf(1 to createSession(0))
             repository.setIdDirty(true)
 
             assertThat(repository.hasCacheSession(1)).isFalse()
@@ -180,7 +181,7 @@ class SessionsRepositoryTest {
                     SessionsLocalDataSource(createOrmaDatabase()),
                     SessionsRemoteDataSource(mock())
             )
-            repository.cachedSessions = mapOf(1 to Session())
+            repository.cachedSessions = mapOf(1 to createSession(0))
             repository.setIdDirty(false)
 
             assertThat(repository.hasCacheSession(1)).isTrue()
@@ -279,7 +280,7 @@ class SessionsRepositoryTest {
                 }
     }
 
-    fun createSession(sessionId: Int) = Session().apply { id = sessionId }
+    fun createSession(sessionId: Int) = DummyCreator.newSession(sessionId)
 
     fun mockDroidKaigiClient(sessions: List<Session>) = mock<DroidKaigiClient>().apply {
         getSessions(any<Locale>()).invoked.thenReturn(
