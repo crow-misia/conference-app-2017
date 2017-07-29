@@ -2,6 +2,7 @@ package io.github.droidkaigi.confsched2017.model
 
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.BuildConfig
+import io.github.droidkaigi.confsched2017.util.DummyCreator
 import org.junit.Test
 
 class SpeakerTest {
@@ -9,7 +10,7 @@ class SpeakerTest {
     @Test
     @Throws(Exception::class)
     fun getAdjustedImageUrlWhenNull() {
-        val speaker = Speaker().apply { imageUrl = null }
+        val speaker = DummyCreator.newSpeaker(0).apply { imageUrl = null }
         speaker.adjustedImageUrl.should be null
     }
 
@@ -17,7 +18,7 @@ class SpeakerTest {
     @Throws(Exception::class)
     fun getAdjustedImageUrlWhenHttpUrl() {
         val url = "http://droidkaigi.github.io/2017/images/1.jpg"
-        val speaker = Speaker().apply { imageUrl = url }
+        val speaker = DummyCreator.newSpeaker(0).apply { imageUrl = url }
         speaker.adjustedImageUrl.should be url
     }
 
@@ -25,7 +26,7 @@ class SpeakerTest {
     @Throws(Exception::class)
     fun getAdjustedImageUrlWhenHttpsUrl() {
         val url = "https://droidkaigi.github.io/2017/images/1.jpg"
-        val speaker = Speaker().apply { imageUrl = url }
+        val speaker = DummyCreator.newSpeaker(0).apply { imageUrl = url }
         speaker.adjustedImageUrl.should be url
     }
 
@@ -33,7 +34,7 @@ class SpeakerTest {
     @Throws(Exception::class)
     fun getAdjustedImageUrlWhenRelativePath() {
         val url = "/images/1.jpg"
-        val speaker = Speaker().apply { imageUrl = url }
+        val speaker = DummyCreator.newSpeaker(0).apply { imageUrl = url }
         speaker.adjustedImageUrl.should be BuildConfig.STATIC_ROOT + url
     }
 
@@ -41,7 +42,7 @@ class SpeakerTest {
     @Throws(Exception::class)
     fun getAdjustedImageUrlWhenInvalidPath() {
         val url = "images/1.jpg"
-        val speaker = Speaker().apply { imageUrl = url }
+        val speaker = DummyCreator.newSpeaker(0).apply { imageUrl = url }
         speaker.adjustedImageUrl.should be null
     }
 }

@@ -9,21 +9,21 @@ class SessionFeedbackTest {
     @Test
     @Throws(Exception::class)
     fun isAllFilledWhenrelevancyIsNotFilled() {
-        val feedback = SessionFeedback(DummyCreator.newSession(1), 0, 3, 3, 3, null)
+        val feedback = SessionFeedback.create(DummyCreator.newSession(1), 0, 3, 3, 3, null)
         feedback.isAllFilled.should be false
     }
 
     @Test
     @Throws(Exception::class)
     fun isAllFilledWhenAllFilled() {
-        val feedback = SessionFeedback(DummyCreator.newSession(1), 3, 3, 3, 3, "Cool")
+        val feedback = SessionFeedback.create(DummyCreator.newSession(1), 3, 3, 3, 3, "Cool")
         feedback.isAllFilled.should be true
     }
 
     @Test
     @Throws(Exception::class)
     fun isAllFilledWhenCommentIsNotFilled() {
-        val feedback = SessionFeedback(DummyCreator.newSession(1), 3, 3, 3, 3, null)
+        val feedback = SessionFeedback.create(DummyCreator.newSession(1), 3, 3, 3, 3, null)
         feedback.isAllFilled.should be true
     }
 
