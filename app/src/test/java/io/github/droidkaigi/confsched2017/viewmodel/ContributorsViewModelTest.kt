@@ -7,6 +7,7 @@ import com.sys1yagi.kmockito.verify
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.repository.contributors.ContributorsRepository
+import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.github.droidkaigi.confsched2017.util.RxTestSchedulerRule
 import io.github.droidkaigi.confsched2017.view.helper.ResourceResolver
 import io.github.droidkaigi.confsched2017.view.helper.Navigator
@@ -17,6 +18,7 @@ import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
 import org.mockito.Mockito.never
+import org.robolectric.RuntimeEnvironment
 
 class ContributorsViewModelTest {
 
@@ -26,26 +28,26 @@ class ContributorsViewModelTest {
         val schedulerRule = RxTestSchedulerRule
 
         private val EXPECTED_CONTRIBUTORS = listOf(
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Alice"
                     htmlUrl = "AliceUrl"
                 },
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Bob"
                 },
-                Contributor().apply {
+                DummyCreator.newContributor(0).apply {
                     name = "Charlie"
                 }
         )
     }
 
-    private val resourceResolver = object : ResourceResolver(null) {
-        override fun getString(resId: Int): String = "Contributors"
+    private val resourceResolver = object : ResourceResolver(RuntimeEnvironment.application) {
+        override fun getString(resId: Int) = "Contributors"
 
-        override fun getString(resId: Int, vararg formatArgs: Any?): String = "(${formatArgs[0]} people)"
+        override fun getString(resId: Int, vararg formatArgs: Any) = "(${formatArgs[0]} people)"
     }
 
-    private val toolbarViewModel = mock<ToolbarViewModel>()
+    private val toolbarViewModel = ToolbarViewModel()
 
     private val repository = mock<ContributorsRepository>().apply {
         findAll().invoked.thenReturn(Single.just(EXPECTED_CONTRIBUTORS))
@@ -76,7 +78,7 @@ class ContributorsViewModelTest {
         assertEq(viewModel.contributorViewModels, EXPECTED_CONTRIBUTORS)
         viewModel.loadingVisibility.should be 8 // GONE
         viewModel.refreshing.should be false
-        toolbarViewModel.verify().toolbarTitle = "Contributors (3 people)"
+        toolbarViewModel.toolbarTitle.should be "Contributors (3 people)"
     }
 
     @Test
@@ -88,7 +90,7 @@ class ContributorsViewModelTest {
         assertEq(viewModel.contributorViewModels, EXPECTED_CONTRIBUTORS)
         viewModel.loadingVisibility.should be 8 // GONE
         viewModel.refreshing.should be false
-        toolbarViewModel.verify().toolbarTitle = "Contributors (3 people)"
+        toolbarViewModel.toolbarTitle.should be "Contributors (3 people)"
     }
 
     @Test

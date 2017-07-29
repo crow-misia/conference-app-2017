@@ -16,6 +16,7 @@ import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
 import org.mockito.Mockito.never
+import org.robolectric.RuntimeEnvironment
 
 class SponsorshipsViewModelTest {
 
@@ -25,31 +26,31 @@ class SponsorshipsViewModelTest {
         val schedulerRule = RxTestSchedulerRule
 
         private val EXPECTED_SPONSORSHIPS = listOf(
-                Sponsorship().apply {
-                    category = "Category A"
+                Sponsorship(
+                    category = "Category A",
                     sponsors = listOf(
                             createDummySponsor("a"),
                             createDummySponsor("b")
                     )
-                },
-                Sponsorship().apply {
-                    category = "Category B"
+                ),
+                Sponsorship(
+                    category = "Category B",
                     sponsors = listOf(
                             createDummySponsor("c")
                     )
-                }
+                )
         )
 
-        private fun createDummySponsor(name: String) = Sponsor().apply {
-            imageUrl = "imageUrl_$name"
+        private fun createDummySponsor(name: String) = Sponsor(
+            imageUrl = "imageUrl_$name",
             url = "url_$name"
-        }
+        )
     }
 
-    private val resourceResolver = object : ResourceResolver(null) {
+    private val resourceResolver = object : ResourceResolver(RuntimeEnvironment.application) {
         override fun getString(resId: Int): String = "dummy"
 
-        override fun loadJSONFromAsset(jsonFileName: String?): String = Gson().toJson(EXPECTED_SPONSORSHIPS)
+        override fun loadJSONFromAsset(jsonFileName: String): String = Gson().toJson(EXPECTED_SPONSORSHIPS)
     }
 
     private lateinit var navigator: Navigator
