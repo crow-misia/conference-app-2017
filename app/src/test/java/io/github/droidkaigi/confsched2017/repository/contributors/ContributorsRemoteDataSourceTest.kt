@@ -1,7 +1,8 @@
 package io.github.droidkaigi.confsched2017.repository.contributors
 
-import com.sys1yagi.kmockito.invoked
-import com.sys1yagi.kmockito.mock
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
 import io.github.droidkaigi.confsched2017.util.DummyCreator
@@ -22,10 +23,10 @@ class ContributorsRemoteDataSourceTest {
 
     @Test
     fun findAll() {
-        client.contributors().invoked.thenReturn(Single.just(listOf(
+        whenever(client.contributors()) doReturn Single.just(listOf(
                 DummyCreator.newContributor(0).apply {
                     name = "Alice"
-                })))
+                }))
 
         ContributorsRemoteDataSource(client).findAll().test().run {
             schedulerRule.testScheduler.triggerActions()

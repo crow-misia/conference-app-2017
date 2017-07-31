@@ -2,9 +2,9 @@ package io.github.droidkaigi.confsched2017.viewmodel
 
 import android.content.Context
 import com.google.gson.Gson
-import com.sys1yagi.kmockito.any
-import com.sys1yagi.kmockito.mock
-import com.sys1yagi.kmockito.verify
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.model.Sponsor
 import io.github.droidkaigi.confsched2017.model.Sponsorship
@@ -48,7 +48,7 @@ class SponsorshipsViewModelTest {
         )
     }
 
-    private val resourceResolver = object : ResourceResolver(mock<Context>()) {
+    private val resourceResolver = object : ResourceResolver(mock()) {
         override fun getString(resId: Int): String = "dummy"
 
         override fun loadJSONFromAsset(jsonFileName: String): String = Gson().toJson(EXPECTED_SPONSORSHIPS)
@@ -60,7 +60,7 @@ class SponsorshipsViewModelTest {
 
     @Before
     fun setUp() {
-        navigator = mock<Navigator>()
+        navigator = mock()
         viewModel = SponsorshipsViewModel(resourceResolver, navigator, CompositeDisposable())
     }
 
@@ -86,9 +86,9 @@ class SponsorshipsViewModelTest {
 
         val targetSponsor = viewModel.sponsorShipViewModels[0].sponsorViewModels[0]
 
-        navigator.verify(never()).navigateToWebPage(any())
+        verify(navigator, never()).navigateToWebPage(any())
         targetSponsor.onClickSponsor(null)
-        navigator.verify().navigateToWebPage("url_a")
+        verify(navigator).navigateToWebPage("url_a")
     }
 
     private fun assertSponsorShipEq(actual: List<SponsorshipViewModel>, expected: List<Sponsorship>) {

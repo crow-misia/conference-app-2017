@@ -1,10 +1,10 @@
 package io.github.droidkaigi.confsched2017.viewmodel
 
 import android.content.Context
-import com.sys1yagi.kmockito.any
-import com.sys1yagi.kmockito.invoked
-import com.sys1yagi.kmockito.mock
-import com.sys1yagi.kmockito.verify
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.repository.contributors.ContributorsRepository
@@ -19,7 +19,6 @@ import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
 import org.mockito.Mockito.never
-import org.robolectric.RuntimeEnvironment
 
 class ContributorsViewModelTest {
 
@@ -42,7 +41,7 @@ class ContributorsViewModelTest {
         )
     }
 
-    private val resourceResolver = object : ResourceResolver(mock<Context>()) {
+    private val resourceResolver = object : ResourceResolver(mock()) {
         override fun getString(resId: Int) = "Contributors"
 
         override fun getString(resId: Int, vararg formatArgs: Any) = "(${formatArgs[0]} people)"
@@ -50,8 +49,8 @@ class ContributorsViewModelTest {
 
     private val toolbarViewModel = ToolbarViewModel()
 
-    private val repository = mock<ContributorsRepository>().apply {
-        findAll().invoked.thenReturn(Single.just(EXPECTED_CONTRIBUTORS))
+    private val repository = mock<ContributorsRepository> {
+        on { findAll() } doReturn Single.just(EXPECTED_CONTRIBUTORS)
     }
 
     private lateinit var navigator: Navigator
@@ -100,9 +99,9 @@ class ContributorsViewModelTest {
         viewModel.start()
         schedulerRule.testScheduler.triggerActions()
 
-        navigator.verify(never()).navigateToWebPage(any())
+        verify(navigator, never()).navigateToWebPage(any())
         viewModel.contributorViewModels[0].onClickContributor(null)
-        navigator.verify().navigateToWebPage("AliceUrl")
+        verify(navigator).navigateToWebPage("AliceUrl")
     }
 
     private fun assertEq(actual: List<ContributorViewModel>, expected: List<Contributor>) {

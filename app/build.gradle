@@ -239,7 +239,7 @@ dependencies {
 
     // Test
     testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.3.2"
+    testCompile 'org.robolectric:robolectric:3.4'
     testCompile 'com.squareup.assertj:assertj-android:1.1.1'
     testCompile 'org.mockito:mockito-core:2.8.47'
     androidTestCompile 'org.mockito:mockito-android:2.8.47'
@@ -253,7 +253,7 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
     testCompile 'com.taroid.knit:knit:0.1.2'
-    testCompile 'com.github.sys1yagi:kmockito:0.1.2'
+    testCompile 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
 }
 
 jacoco {

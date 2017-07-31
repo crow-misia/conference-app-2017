@@ -1,8 +1,6 @@
 package io.github.droidkaigi.confsched2017.repository.sessions
 
-import com.sys1yagi.kmockito.invoked
-import com.sys1yagi.kmockito.mock
-import com.sys1yagi.kmockito.verify
+import com.nhaarman.mockito_kotlin.*
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.model.*
 import io.github.droidkaigi.confsched2017.util.DummyCreator
@@ -20,13 +18,13 @@ class MySessionsRepositoryTest {
     @Throws(Exception::class)
     fun findAll() {
         val expected = Array(10) { i -> DummyCreator.newMySession(i) }.toList()
-        localDataSource.findAll().invoked.thenReturn(Single.just(expected))
+        whenever(localDataSource.findAll()) doReturn Single.just(expected)
 
         repository.findAll().test().run {
             assertNoErrors()
             assertResult(expected)
             assertComplete()
-            localDataSource.verify(Mockito.times(1)).findAll()
+            verify(localDataSource, times(1)).findAll()
         }
 
         // check if found sessions are cached
@@ -34,7 +32,7 @@ class MySessionsRepositoryTest {
             assertNoErrors()
             assertResult(expected)
             assertComplete()
-            localDataSource.verify(Mockito.times(1)).findAll()
+            verify(localDataSource, times(1)).findAll()
         }
     }
 
@@ -42,7 +40,7 @@ class MySessionsRepositoryTest {
     @Throws(Exception::class)
     fun save() {
         val session = DummyCreator.newSession(1)
-        localDataSource.save(session).invoked.thenReturn(Completable.complete())
+        whenever(localDataSource.save(session)) doReturn Completable.complete()
         repository.save(session).test().run {
             assertNoErrors()
             assertComplete()
@@ -53,7 +51,7 @@ class MySessionsRepositoryTest {
             assertNoErrors()
             assertResult(listOf(MySession(session = session)))
             assertComplete()
-            localDataSource.verify(Mockito.never()).findAll()
+            verify(localDataSource, never()).findAll()
         }
     }
 
@@ -67,7 +65,7 @@ class MySessionsRepositoryTest {
         repository.save(session1)
         repository.save(session2)
 
-        localDataSource.delete(session1).invoked.thenReturn(Single.just(1))
+        whenever(localDataSource.delete(session1)) doReturn Single.just(1)
         repository.delete(session1).test().run {
             assertNoErrors()
             assertResult(1)
@@ -85,10 +83,10 @@ class MySessionsRepositoryTest {
     @Test
     @Throws(Exception::class)
     fun isExist() {
-        localDataSource.isExist(1).invoked.thenReturn(false)
+        whenever(localDataSource.isExist(1)).thenReturn(false)
         repository.isExist(1).should be false
 
-        localDataSource.isExist(1).invoked.thenReturn(true)
+        whenever(localDataSource.isExist(1)).thenReturn(true)
         repository.isExist(1).should be true
     }
 

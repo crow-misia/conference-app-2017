@@ -1,8 +1,6 @@
 package io.github.droidkaigi.confsched2017.repository.sessions
 
-import com.sys1yagi.kmockito.invoked
-import com.sys1yagi.kmockito.mock
-import com.sys1yagi.kmockito.verify
+import com.nhaarman.mockito_kotlin.*
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
 import io.github.droidkaigi.confsched2017.model.Session
@@ -12,7 +10,6 @@ import io.reactivex.Single
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import java.util.*
@@ -67,8 +64,8 @@ class SessionsRepositoryTest {
     fun findAllRemoteRequestAndLocalCache() {
         val sessions = listOf(createSession(0))
         val client = mockDroidKaigiClient(sessions)
-        val ormaDatabase = mock<OrmaDatabase>().apply {
-            transactionAsCompletable(any()).invoked.thenReturn(Completable.complete())
+        val ormaDatabase = mock<OrmaDatabase> {
+            on { transactionAsCompletable(any()) } doReturn Completable.complete()
         }
         val cachedSessions: MutableMap<Int, Session> = spy(mutableMapOf())
 
@@ -86,9 +83,9 @@ class SessionsRepositoryTest {
                     assertResult(sessions)
                     assertComplete()
 
-                    client.verify().getSessions(eq(Locale.JAPANESE))
-                    ormaDatabase.verify().transactionAsCompletable(any())
-                    cachedSessions.verify(never()).values
+                    verify(client).getSessions(eq(Locale.JAPANESE))
+                    verify(ormaDatabase).transactionAsCompletable(any())
+                    verify(cachedSessions, never()).values
                 }
 
         repository.findAll(Locale.JAPANESE)
@@ -98,7 +95,7 @@ class SessionsRepositoryTest {
                     assertThat(values().first().size).isEqualTo(1)
                     assertComplete()
 
-                    cachedSessions.verify().values
+                    verify(cachedSessions).values
                 }
     }
 
@@ -122,8 +119,8 @@ class SessionsRepositoryTest {
                     assertResult(sessions)
                     assertComplete()
 
-                    client.verify().getSessions(eq(Locale.JAPANESE))
-                    cachedSessions.verify(never()).values
+                    verify(client).getSessions(eq(Locale.JAPANESE))
+                    verify(cachedSessions, never()).values
                 }
 
         repository.setIdDirty(true)
@@ -135,7 +132,7 @@ class SessionsRepositoryTest {
                     assertThat(values().first().size).isEqualTo(1)
                     assertComplete()
 
-                    cachedSessions.verify(never()).values
+                    verify(cachedSessions, never()).values
                 }
     }
 
@@ -244,7 +241,7 @@ class SessionsRepositoryTest {
                     assertNoErrors()
                     assertThat(values().first().id).isEqualTo(1)
                     assertComplete()
-                    cachedSessions.verify()[eq(1)]
+                    verify(cachedSessions)[eq(1)]
                 }
     }
 
@@ -281,17 +278,14 @@ class SessionsRepositoryTest {
                     assertNoErrors()
                     assertThat(values().first().id).isEqualTo(12)
                     assertComplete()
-                    cachedSessions.verify(never()).get(eq(12))
-                    client.verify(never()).getSessions(any<Locale>())
+                    verify(cachedSessions, never()).get(eq(12))
+                    verify(client, never()).getSessions(any<Locale>())
                 }
     }
 
     fun createSession(sessionId: Int) = DummyCreator.newSession(sessionId)
 
-    fun mockDroidKaigiClient(sessions: List<Session>): DroidKaigiClient = mock<DroidKaigiClient>().apply {
-        getSessions(any()).invoked.thenReturn(
-                Single.just(sessions)
-        )
+    fun mockDroidKaigiClient(sessions: List<Session>) = mock<DroidKaigiClient> {
+        on { getSessions(any()) } doReturn Single.just(sessions)
     }
-
 }

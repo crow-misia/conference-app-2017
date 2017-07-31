@@ -36,69 +36,54 @@ class AppModule(private val app: Application) {
     fun provideContext(): Context = app
 
     @Provides
-    fun provideCompositeDisposable(): CompositeDisposable {
-        return CompositeDisposable()
-    }
+    fun provideCompositeDisposable() = CompositeDisposable()
 
     @Provides
-    fun provideDefaultPrefs(context: Context): DefaultPrefs {
-        return DefaultPrefs.get(context)
-    }
+    fun provideDefaultPrefs(context: Context): DefaultPrefs = DefaultPrefs.get(context)
 
     @Singleton
     @Provides
-    fun provideOrmaDatabase(context: Context): OrmaDatabase {
-        return OrmaDatabase.builder(context)
+    fun provideOrmaDatabase(context: Context): OrmaDatabase =
+        OrmaDatabase.builder(context)
                 .readOnMainThread(AccessThreadConstraint.WARNING)
                 .writeOnMainThread(AccessThreadConstraint.WARNING)
                 .build()
-    }
 
     @Provides
-    fun provideRequestInterceptor(interceptor: RequestInterceptor): Interceptor {
-        return interceptor
-    }
+    fun provideRequestInterceptor(interceptor: RequestInterceptor): Interceptor = interceptor
 
     @Singleton
     @Provides
-    fun provideDroidKaigiService(client: OkHttpClient): DroidKaigiService {
-        return Retrofit.Builder()
+    fun provideDroidKaigiService(client: OkHttpClient) =
+        Retrofit.Builder()
                 .client(client)
                 .baseUrl(BuildConfig.API_ROOT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
                 .create(DroidKaigiService::class.java)
-    }
 
     @Singleton
     @Provides
-    fun provideGithubService(client: OkHttpClient): GithubService {
-        return Retrofit.Builder().client(client)
+    fun provideGithubService(client: OkHttpClient) =
+        Retrofit.Builder().client(client)
                 .baseUrl("https://api.github.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
                 .create(GithubService::class.java)
-    }
 
     @Singleton
     @Provides
-    fun provideGoogleFormService(client: OkHttpClient): GoogleFormService {
-        return Retrofit.Builder().client(client)
+    fun provideGoogleFormService(client: OkHttpClient) =
+        Retrofit.Builder().client(client)
                 .baseUrl("https://docs.google.com/forms/d/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
                 .create(GoogleFormService::class.java)
-    }
 
     companion object {
-
-        internal val SHARED_PREF_NAME = "preferences"
-
-        private fun createGson(): Gson {
-            return GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create()
-        }
+        private fun createGson() = GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create()
     }
 }

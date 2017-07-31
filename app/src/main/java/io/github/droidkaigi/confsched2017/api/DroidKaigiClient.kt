@@ -18,7 +18,7 @@ import retrofit2.Response
 class DroidKaigiClient @Inject constructor(private val droidKaigiService: DroidKaigiService, private val githubService: GithubService,
             private val googleFormService: GoogleFormService) {
 
-    fun getSessions(locale: Locale?): Single<List<Session>> {
+    fun getSessions(locale: Locale): Single<List<Session>> {
         return when(locale) {
             Locale.JAPANESE -> droidKaigiService.sessionsJa()
             else -> droidKaigiService.sessionsEn()
