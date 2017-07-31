@@ -1,7 +1,4 @@
 package io.github.droidkaigi.confsched2017.view.fragment
-
-import com.annimon.stream.Stream
-
 import android.content.Context
 import android.content.Intent
 import android.net.Uri

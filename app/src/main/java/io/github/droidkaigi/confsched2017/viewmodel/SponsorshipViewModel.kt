@@ -2,10 +2,6 @@ package io.github.droidkaigi.confsched2017.viewmodel
 
 import android.databinding.BaseObservable
 import android.databinding.ObservableArrayList
-import android.databinding.ObservableList
-
-import com.annimon.stream.Stream
-import io.github.droidkaigi.confsched2017.model.Sponsor
 
 import io.github.droidkaigi.confsched2017.model.Sponsorship
 import io.github.droidkaigi.confsched2017.view.helper.Navigator

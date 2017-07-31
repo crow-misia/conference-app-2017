@@ -2,13 +2,9 @@ package io.github.droidkaigi.confsched2017.viewmodel
 
 import android.databinding.BaseObservable
 import android.databinding.ObservableArrayList
-import android.databinding.ObservableList
 
-import com.annimon.stream.Stream
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-
-import java.lang.reflect.Type
 
 import javax.inject.Inject
 
@@ -19,7 +15,6 @@ import io.github.droidkaigi.confsched2017.view.helper.Navigator
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
@@ -57,7 +52,7 @@ class SponsorshipsViewModel @Inject internal constructor(
         json?.let {
             val gson = Gson()
             val listType = object : TypeToken<List<Sponsorship>>() { }.type
-            return gson.fromJson<List<Sponsorship>>(json, listType)
+            return gson.fromJson(json, listType)
         } ?: emptyList()
 
     private fun convertToViewModel(sponsorships: List<Sponsorship>) =

@@ -3,24 +3,19 @@ package io.github.droidkaigi.confsched2017.viewmodel
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableArrayList
-import android.databinding.ObservableList
 import android.support.annotation.StringRes
 import android.view.View
-
-import com.annimon.stream.Stream
 
 import javax.inject.Inject
 
 import io.github.droidkaigi.confsched2017.BR
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.di.scope.FragmentScope
-import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.repository.contributors.ContributorsRepository
 import io.github.droidkaigi.confsched2017.view.helper.ResourceResolver
 import io.github.droidkaigi.confsched2017.view.helper.Navigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

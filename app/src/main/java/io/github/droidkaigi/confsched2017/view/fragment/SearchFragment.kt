@@ -1,11 +1,7 @@
 package io.github.droidkaigi.confsched2017.view.fragment
 
-import com.annimon.stream.Stream
-
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
