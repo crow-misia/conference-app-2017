@@ -46,7 +46,7 @@ internal constructor(private val navigator: Navigator) : BaseObservable(), ViewM
 
         @TargetApi(Build.VERSION_CODES.N)
         override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-            return shouldOverrideUrlLoading(view, request.url.toString())
+            return this@LicensesViewModel.shouldOverrideUrlLoading(request.url.toString())
         }
     }
 }

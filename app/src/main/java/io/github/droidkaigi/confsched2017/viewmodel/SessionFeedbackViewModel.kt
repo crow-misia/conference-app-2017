@@ -143,7 +143,7 @@ class SessionFeedbackViewModel @Inject internal constructor(
     }
 
     override fun destroy() {
-        sessionFeedbackRepository.saveToCache(sessionFeedback!!)
+        sessionFeedback?.let { sessionFeedbackRepository.saveToCache(it) }
         compositeDisposable.clear()
         this.callback = null
     }

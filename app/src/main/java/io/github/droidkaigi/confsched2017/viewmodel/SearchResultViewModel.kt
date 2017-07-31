@@ -46,7 +46,7 @@ class SearchResultViewModel private constructor(private var text: String, val ty
         @DrawableRes
         get() = type.iconResId
 
-    fun getMatchedText(searchText: String?): SpannableStringBuilder {
+    fun getMatchedText(searchText: String): SpannableStringBuilder {
         val builder = SpannableStringBuilder()
 
         if (TextUtils.isEmpty(text)) {
@@ -58,7 +58,7 @@ class SearchResultViewModel private constructor(private var text: String, val ty
         if (TextUtils.isEmpty(searchText)) {
             return builder.append(text)
         } else {
-            val idx = text.toLowerCase().indexOf(searchText!!.toLowerCase())
+            val idx = text.toLowerCase().indexOf(searchText.toLowerCase())
             if (idx >= 0) {
                 builder.append(text)
                 builder.setSpan(

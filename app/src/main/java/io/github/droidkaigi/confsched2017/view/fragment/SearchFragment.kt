@@ -66,7 +66,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.menu_search, menu)
         val menuItem = menu?.findItem(R.id.action_search)
-        MenuItemCompat.setOnActionExpandListener(menuItem, object : MenuItemCompat.OnActionExpandListener {
+        menuItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 return true
             }
@@ -94,7 +94,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
         super.onPrepareOptionsMenu(menu)
-        MenuItemCompat.expandActionView(menu!!.findItem(R.id.action_search))
+        menu?.findItem(R.id.action_search)?.expandActionView()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -158,7 +158,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
 
         private var allList: List<SearchResultViewModel>? = null
 
-        internal var previousSearchText: String? = null
+        internal var previousSearchText: String = ""
 
         init {
             setHasStableIds(true)
@@ -192,8 +192,8 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
 
                     if (constraint.isNotEmpty()) {
                         val filterPattern = constraint.toString().toLowerCase().trim { it <= ' ' }
-                        Stream.of(allList!!)
-                                .filter { viewModel -> viewModel.match(filterPattern) }
+                        allList.orEmpty().asSequence()
+                                .filter { it.match(filterPattern) }
                                 .forEach{ filteredList.add(it) }
                     }
 

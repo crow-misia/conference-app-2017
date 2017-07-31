@@ -147,7 +147,7 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
         activity.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
         val actionTextColor = typedValue.data
         Snackbar.make(binding.fab, textId, Snackbar.LENGTH_SHORT)
-                .setAction(actionTextId) { v -> binding.fab.performClick() }
+                .setAction(actionTextId) { _ -> binding.fab.performClick() }
                 .setActionTextColor(actionTextColor)
                 .show()
     }
