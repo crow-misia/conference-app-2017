@@ -44,7 +44,6 @@ class SessionFeedback @Setter constructor(
     var isSubmitted: Boolean = false
 ) {
     companion object {
-        @JvmStatic
         fun create(session: Session, relevancy: Int, asExpected: Int, difficulty: Int, knowledgeable: Int, comment: String?) =
                 SessionFeedback(
                         sessionId = session.id,

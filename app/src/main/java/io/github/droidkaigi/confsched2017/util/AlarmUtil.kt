@@ -16,7 +16,6 @@ object AlarmUtil {
 
     private val REMIND_DURATION_MINUTES_FOR_START = TimeUnit.MINUTES.toMillis(10)
 
-    @JvmStatic
     fun registerAlarm(context: Context, session: Session) {
         var time = session.stime.time - REMIND_DURATION_MINUTES_FOR_START
 
@@ -35,7 +34,6 @@ object AlarmUtil {
         }
     }
 
-    @JvmStatic
     fun unregisterAlarm(context: Context, session: Session) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(createAlarmIntent(context, session))

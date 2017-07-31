@@ -17,13 +17,13 @@ import io.reactivex.SingleEmitter
 @Singleton
 class SessionsRepository @Inject constructor(private val localDataSource: SessionsLocalDataSource, private val remoteDataSource: SessionsRemoteDataSource) : SessionsDataSource {
 
-    @VisibleForTesting internal var cachedSessions: Map<Int, Session> = LinkedHashMap()
+    @VisibleForTesting internal var cachedSessions: MutableMap<Int, Session> = LinkedHashMap()
 
     private var isDirty = true
 
     override fun findAll(locale: Locale): Single<List<Session>> {
         if (hasCacheSessions()) {
-            return Single.create { emitter -> emitter.onSuccess(ArrayList(cachedSessions.values)) }
+            return Single.create { it.onSuccess(ArrayList(cachedSessions.values)) }
         }
 
         if (isDirty) {
@@ -35,7 +35,7 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
 
     override fun find(sessionId: Int, locale: Locale): Maybe<Session> {
         if (hasCacheSession(sessionId)) {
-            return Maybe.create { emitter -> emitter.onSuccess(cachedSessions[sessionId]!!) }
+            return Maybe.create { it.onSuccess(cachedSessions[sessionId]!!) }
         }
 
         if (isDirty) {
@@ -53,7 +53,7 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
      * Clear all caches. only for debug purposes
      */
     override fun deleteAll() {
-        cachedSessions = LinkedHashMap()
+        cachedSessions.clear()
         localDataSource.deleteAll()
         isDirty = true
     }
@@ -79,7 +79,8 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
     }
 
     private fun refreshCache(sessions: List<Session>) {
-        cachedSessions = sessions.map { Pair(it.id, it) }.toMap()
+        cachedSessions.clear()
+        sessions.forEach { cachedSessions.put(it.id, it) }
         isDirty = false
     }
 

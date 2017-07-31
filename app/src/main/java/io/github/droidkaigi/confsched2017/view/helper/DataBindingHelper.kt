@@ -6,10 +6,8 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
 
 import org.lucasr.twowayview.widget.SpannableGridLayoutManager
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.databinding.BindingAdapter
-import android.graphics.drawable.Drawable
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.design.widget.FloatingActionButton

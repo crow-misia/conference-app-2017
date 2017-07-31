@@ -1,14 +1,11 @@
 package io.github.droidkaigi.confsched2017.view.customview
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.databinding.BindingAdapter
-import android.databinding.DataBindingUtil
 import android.databinding.InverseBindingAdapter
 import android.databinding.InverseBindingListener
 import android.databinding.InverseBindingMethod
 import android.databinding.InverseBindingMethods
-import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View

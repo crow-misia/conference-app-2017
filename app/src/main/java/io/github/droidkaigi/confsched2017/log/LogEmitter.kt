@@ -5,7 +5,6 @@ import javax.inject.Singleton
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
 
 /**
  * @author KeithYokoma

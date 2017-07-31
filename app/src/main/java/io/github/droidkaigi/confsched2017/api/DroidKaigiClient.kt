@@ -18,15 +18,16 @@ import retrofit2.Response
 class DroidKaigiClient @Inject constructor(private val droidKaigiService: DroidKaigiService, private val githubService: GithubService,
             private val googleFormService: GoogleFormService) {
 
-    fun getSessions(locale: Locale): Single<List<Session>> {
-        if (locale === Locale.JAPANESE) {
-            return droidKaigiService.sessionsJa()
-        } else {
-            return droidKaigiService.sessionsEn()
+    fun getSessions(locale: Locale?): Single<List<Session>> {
+        return when(locale) {
+            Locale.JAPANESE -> droidKaigiService.sessionsJa()
+            else -> droidKaigiService.sessionsEn()
         }
     }
 
-    fun contributors() = githubService.getContributors("DroidKaigi", "conference-app-2017", INCLUDE_ANONYMOUS, MAX_PER_PAGE)
+    fun contributors(): Single<List<Contributor>> {
+        return githubService.getContributors("DroidKaigi", "conference-app-2017", INCLUDE_ANONYMOUS, MAX_PER_PAGE)
+    }
 
     fun submitSessionFeedback(sessionFeedback: SessionFeedback): Single<Response<Void>> {
         return googleFormService.submitSessionFeedback(sessionFeedback.sessionId,

@@ -85,16 +85,15 @@ class NotificationReceiver : BroadcastReceiver() {
 
         private val TAG = NotificationReceiver::class.java.simpleName
 
-        private val KEY_SESSION_ID = "session_id"
+        const val KEY_SESSION_ID = "session_id"
 
-        private val KEY_TITLE = "title"
+        const val KEY_TITLE = "title"
 
-        private val KEY_TEXT = "text"
+        const val KEY_TEXT = "text"
 
-        private val GROUP_NAME = "droidkaigi"
-        private val GROUP_NOTIFICATION_ID = 0
+        const val GROUP_NAME = "droidkaigi"
+        const val GROUP_NOTIFICATION_ID = 0
 
-        @JvmStatic
         fun createIntent(context: Context, sessionId: Int, title: String, text: String): Intent {
             val intent = Intent(context, NotificationReceiver::class.java)
             intent.putExtra(NotificationReceiver.KEY_SESSION_ID, sessionId)

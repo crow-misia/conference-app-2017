@@ -12,15 +12,14 @@ import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 object DateUtil {
-    private val FORMAT_MMDD = "MMMd"
+    const val FORMAT_MMDD = "MMMd"
 
-    private val FORMAT_KKMM = "kk:mm"
+    const val FORMAT_KKMM = "kk:mm"
 
-    private val FORMAT_YYYYMMDDKKMM = "yyyyMMMdkkmm"
+    const val FORMAT_YYYYMMDDKKMM = "yyyyMMMdkkmm"
 
-    private val FORMAT_PROGRAM_START_DATE = "MM/dd(E) kk:mm"
+    const val FORMAT_PROGRAM_START_DATE = "MM/dd(E) kk:mm"
 
-    @JvmStatic
     fun getMonthDate(date: Date, context: Context): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), FORMAT_MMDD)
@@ -31,7 +30,6 @@ object DateUtil {
         }
     }
 
-    @JvmStatic
     fun getHourMinute(date: Date): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), FORMAT_KKMM)
@@ -41,7 +39,6 @@ object DateUtil {
         }
     }
 
-    @JvmStatic
     fun getLongFormatDate(date: Date?): String {
         return date?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -57,7 +54,6 @@ object DateUtil {
         } ?: ""
     }
 
-    @JvmStatic
     fun getMinutes(stime: Date, etime: Date): Int {
         val range = etime.time - stime.time
 

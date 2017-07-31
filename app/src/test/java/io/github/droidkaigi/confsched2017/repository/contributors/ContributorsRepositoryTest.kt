@@ -3,7 +3,6 @@ package io.github.droidkaigi.confsched2017.repository.contributors
 import com.sys1yagi.kmockito.invoked
 import com.sys1yagi.kmockito.mock
 import com.sys1yagi.kmockito.verify
-import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.reactivex.Single
 import org.junit.Test

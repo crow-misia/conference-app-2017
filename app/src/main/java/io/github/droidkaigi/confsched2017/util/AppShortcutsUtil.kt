@@ -1,6 +1,5 @@
 package io.github.droidkaigi.confsched2017.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -8,8 +7,6 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.support.annotation.RequiresApi
-
-import java.util.Collections
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.view.activity.MainActivity
@@ -19,12 +16,9 @@ object AppShortcutsUtil {
 
     private val APP_SHORTCUTS_SEARCH_ID = "search"
 
-    @JvmStatic
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     fun addShortcuts(context: Context) {
-
-        @SuppressLint("WrongConstant")
-        val shortcutManager = context.getSystemService(Context.SHORTCUT_SERVICE) as ShortcutManager
+        val shortcutManager = context.getSystemService(Context.SHORTCUT_SERVICE) as ShortcutManager?
 
         val intents = arrayOf(Intent(context.applicationContext, MainActivity::class.java).setAction(Intent.ACTION_DEFAULT), Intent(context.applicationContext, SearchActivity::class.java).setAction(Intent.ACTION_DEFAULT))
 
@@ -34,6 +28,6 @@ object AppShortcutsUtil {
                 .setIntents(intents)
                 .build()
 
-        shortcutManager.addDynamicShortcuts(listOf(shortcutInfo))
+        shortcutManager?.addDynamicShortcuts(listOf(shortcutInfo))
     }
 }

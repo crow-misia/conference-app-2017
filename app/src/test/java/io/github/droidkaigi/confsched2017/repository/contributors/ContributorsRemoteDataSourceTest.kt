@@ -4,7 +4,6 @@ import com.sys1yagi.kmockito.invoked
 import com.sys1yagi.kmockito.mock
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
-import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.github.droidkaigi.confsched2017.util.RxTestSchedulerRule
 import io.reactivex.Single

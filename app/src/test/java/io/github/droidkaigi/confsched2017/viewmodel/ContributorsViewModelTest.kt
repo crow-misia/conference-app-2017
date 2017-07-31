@@ -1,5 +1,6 @@
 package io.github.droidkaigi.confsched2017.viewmodel
 
+import android.content.Context
 import com.sys1yagi.kmockito.any
 import com.sys1yagi.kmockito.invoked
 import com.sys1yagi.kmockito.mock
@@ -41,7 +42,7 @@ class ContributorsViewModelTest {
         )
     }
 
-    private val resourceResolver = object : ResourceResolver(RuntimeEnvironment.application) {
+    private val resourceResolver = object : ResourceResolver(mock<Context>()) {
         override fun getString(resId: Int) = "Contributors"
 
         override fun getString(resId: Int, vararg formatArgs: Any) = "(${formatArgs[0]} people)"

@@ -1,8 +1,6 @@
 package io.github.droidkaigi.confsched2017.view.customview
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.databinding.DataBindingUtil
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout

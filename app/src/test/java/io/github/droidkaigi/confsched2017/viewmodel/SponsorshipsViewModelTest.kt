@@ -1,5 +1,6 @@
 package io.github.droidkaigi.confsched2017.viewmodel
 
+import android.content.Context
 import com.google.gson.Gson
 import com.sys1yagi.kmockito.any
 import com.sys1yagi.kmockito.mock
@@ -47,7 +48,7 @@ class SponsorshipsViewModelTest {
         )
     }
 
-    private val resourceResolver = object : ResourceResolver(RuntimeEnvironment.application) {
+    private val resourceResolver = object : ResourceResolver(mock<Context>()) {
         override fun getString(resId: Int): String = "dummy"
 
         override fun loadJSONFromAsset(jsonFileName: String): String = Gson().toJson(EXPECTED_SPONSORSHIPS)

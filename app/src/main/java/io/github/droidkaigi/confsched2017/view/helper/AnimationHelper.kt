@@ -1,7 +1,6 @@
 package io.github.droidkaigi.confsched2017.view.helper
 
 import android.graphics.drawable.Animatable
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat

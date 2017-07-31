@@ -1,7 +1,6 @@
 package io.github.droidkaigi.confsched2017.view.fragment
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 
 import javax.inject.Inject
 
-import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.FragmentLicensesBinding
 import io.github.droidkaigi.confsched2017.viewmodel.LicensesViewModel
 
