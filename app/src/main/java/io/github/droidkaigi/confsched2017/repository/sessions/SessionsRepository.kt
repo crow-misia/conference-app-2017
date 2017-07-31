@@ -17,13 +17,13 @@ import io.reactivex.SingleEmitter
 @Singleton
 class SessionsRepository @Inject constructor(private val localDataSource: SessionsLocalDataSource, private val remoteDataSource: SessionsRemoteDataSource) : SessionsDataSource {
 
-    @VisibleForTesting internal val cachedSessions: MutableMap<Int, Session> = LinkedHashMap<Int, Session>()
+    @VisibleForTesting internal var cachedSessions: Map<Int, Session> = LinkedHashMap()
 
     private var isDirty = true
 
     override fun findAll(locale: Locale): Single<List<Session>> {
         if (hasCacheSessions()) {
-            return Single.create<List<Session>> { emitter -> emitter.onSuccess(ArrayList(cachedSessions.values)) }
+            return Single.create { emitter -> emitter.onSuccess(ArrayList(cachedSessions.values)) }
         }
 
         if (isDirty) {
@@ -53,7 +53,7 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
      * Clear all caches. only for debug purposes
      */
     override fun deleteAll() {
-        cachedSessions.clear()
+        cachedSessions = LinkedHashMap()
         localDataSource.deleteAll()
         isDirty = true
     }
@@ -79,8 +79,7 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
     }
 
     private fun refreshCache(sessions: List<Session>) {
-        cachedSessions.clear()
-        sessions.forEach { cachedSessions.put(it.id, it) }
+        cachedSessions = sessions.map { Pair(it.id, it) }.toMap()
         isDirty = false
     }
 

@@ -26,7 +26,7 @@ class SessionFeedbackFragment : BaseFragment(), SessionFeedbackViewModel.Callbac
     @Inject
     lateinit var viewModel: SessionFeedbackViewModel
 
-    @Args
+    @Args @JvmField
     internal var sessionId: Int = 0
 
     private lateinit var binding: FragmentSessionFeedbackBinding

@@ -26,8 +26,8 @@ class DroidKaigiClientTest {
     @Throws(Exception::class)
     fun getSessions() {
         val expected = Array(10) { DummyCreator.newSession(it) }.toList()
-        droidKaigiService.sessionsJa.invoked.thenReturn(Single.just(expected))
-        droidKaigiService.sessionsEn.invoked.thenReturn(Single.just(expected))
+        droidKaigiService.sessionsJa().invoked.thenReturn(Single.just(expected))
+        droidKaigiService.sessionsEn().invoked.thenReturn(Single.just(expected))
 
         client.getSessions(Locale.JAPANESE).test().run {
             assertNoErrors()
@@ -40,8 +40,8 @@ class DroidKaigiClientTest {
             assertResult(expected)
             assertComplete()
         }
-        droidKaigiService.verify(Mockito.times(1)).sessionsJa
-        droidKaigiService.verify(Mockito.times(1)).sessionsEn
+        droidKaigiService.verify(Mockito.times(1)).sessionsJa()
+        droidKaigiService.verify(Mockito.times(1)).sessionsEn()
     }
 
     @Test
@@ -51,7 +51,7 @@ class DroidKaigiClientTest {
         githubService.getContributors("DroidKaigi", "conference-app-2017", 1, 100)
                 .invoked.thenReturn(Single.just(expected))
 
-        client.contributors.test().run {
+        client.contributors().test().run {
             assertNoErrors()
             assertResult(expected)
             assertComplete()

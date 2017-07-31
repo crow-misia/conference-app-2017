@@ -39,7 +39,7 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
 
-    @Args
+    @Args @JvmField
     internal var sessionId: Int = 0
 
     private lateinit var binding: FragmentSessionDetailBinding
@@ -98,14 +98,14 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
     }
 
     private fun initScroll() {
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+        binding.nestedScroll.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             if (scrollY > oldScrollY) {
                 binding.fab.hide()
             }
             if (scrollY < oldScrollY) {
                 binding.fab.show()
             }
-        })
+        }
     }
 
     override fun onAttach(context: Context?) {
