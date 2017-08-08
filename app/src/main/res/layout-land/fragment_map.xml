@@ -9,7 +9,7 @@
             android:orientation="horizontal"
             >
 
-        <uk.co.senab.photoview.PhotoView
+        <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/img_map"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
