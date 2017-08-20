@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat
  * @author KeithYokoma
  */
 object PermissionUtil {
-    @JvmStatic
     fun isPermissionGranted(context: Context, permission: String): Boolean {
         try {
             return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED

@@ -28,7 +28,5 @@ class RequestInterceptor @Inject constructor(private val connectivityManager: Co
         return chain.proceed(r.build())
     }
 
-    private fun isConnected(): Boolean {
-        return connectivityManager.activeNetworkInfo?.isConnectedOrConnecting ?: false
-    }
+    private fun isConnected() = connectivityManager.activeNetworkInfo?.isConnectedOrConnecting ?: false
 }

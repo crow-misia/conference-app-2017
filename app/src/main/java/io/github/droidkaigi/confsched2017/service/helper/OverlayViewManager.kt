@@ -17,8 +17,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 /**
  * @author KeithYokoma
  */
-class OverlayViewManager @Inject
-constructor(private val context: Context, private val windowManager: WindowManager) {
+class OverlayViewManager @Inject constructor(private val context: Context, private val windowManager: WindowManager) {
     private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, 0, 0,
             WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,

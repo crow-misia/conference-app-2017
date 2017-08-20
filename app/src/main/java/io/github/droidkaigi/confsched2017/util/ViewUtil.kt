@@ -19,7 +19,6 @@ object ViewUtil {
         fun onGlobalLayout(): Boolean
     }
 
-    @JvmStatic
     fun addOneTimeOnGlobalLayoutListener(view: View, onGlobalLayoutListener: OnGlobalLayoutListener) {
         view.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

@@ -63,14 +63,12 @@ class ContributorsFragment : BaseFragment(), ContributorsViewModel.Callback {
         menuInflater?.inflate(R.menu.menu_contributors, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.item_repository -> {
-                viewModel.onClickRepositoryMenu()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        R.id.item_repository -> {
+            viewModel.onClickRepositoryMenu()
+            true
         }
+        else -> super.onOptionsItemSelected(item)
     }
 
 

@@ -32,8 +32,6 @@ class ContributorsActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context): Intent {
-            return Intent(context, ContributorsActivity::class.java)
-        }
+        fun createIntent(context: Context) = Intent(context, ContributorsActivity::class.java)
     }
 }

@@ -24,19 +24,17 @@ object DateUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), FORMAT_MMDD)
             return SimpleDateFormat(pattern, Locale.getDefault()).format(date)
-        } else {
-            val flag = DateUtils.FORMAT_ABBREV_ALL or DateUtils.FORMAT_NO_YEAR
-            return DateUtils.formatDateTime(context, date.time, flag)
         }
+        val flag = DateUtils.FORMAT_ABBREV_ALL or DateUtils.FORMAT_NO_YEAR
+        return DateUtils.formatDateTime(context, date.time, flag)
     }
 
     fun getHourMinute(date: Date): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), FORMAT_KKMM)
             return SimpleDateFormat(pattern, Locale.getDefault()).format(date)
-        } else {
-            return DateFormat.format(FORMAT_KKMM, date).toString()
         }
+        return DateFormat.format(FORMAT_KKMM, date).toString()
     }
 
     fun getLongFormatDate(date: Date?): String {
@@ -44,13 +42,12 @@ object DateUtil {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 val pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), FORMAT_YYYYMMDDKKMM)
                 return SimpleDateFormat(pattern, Locale.getDefault()).format(date)
-            } else {
-                val dayOfWeekFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.LONG)
-                val shortTimeFormat = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT)
-                dayOfWeekFormat.timeZone = TimeZone.getDefault()
-                shortTimeFormat.timeZone = TimeZone.getDefault()
-                return dayOfWeekFormat.format(date) + " " + shortTimeFormat.format(date)
             }
+            val dayOfWeekFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.LONG)
+            val shortTimeFormat = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT)
+            dayOfWeekFormat.timeZone = TimeZone.getDefault()
+            shortTimeFormat.timeZone = TimeZone.getDefault()
+            return dayOfWeekFormat.format(date) + " " + shortTimeFormat.format(date)
         } ?: ""
     }
 
@@ -59,8 +56,7 @@ object DateUtil {
 
         if (range > 0) {
             return (range / TimeUnit.MINUTES.toMillis(1L)).toInt()
-        } else {
-            return 0
         }
+        return 0
     }
 }

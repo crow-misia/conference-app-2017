@@ -105,8 +105,6 @@ class MainActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
-        }
+        fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

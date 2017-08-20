@@ -43,10 +43,10 @@ class ParticlesAnimationView @JvmOverloads constructor(context: Context, attrs: 
             particles.addAll(createParticles(MAX_HEXAGONS))
 
             lines.clear()
-            for (i in 0..particles.size - 1 - 1) {
+            for (i in 0 until particles.size - 1) {
                 val particle = particles[i]
                 // So there are exactly C(particles.size(), 2) (Mathematical Combination) number of lines, which makes more sense.
-                (i + 1..particles.size - 1).forEach { j -> lines.add(Line(particle, particles[j])) }
+                (i + 1 until particles.size).forEach { j -> lines.add(Line(particle, particles[j])) }
             }
         }
     }
@@ -93,7 +93,7 @@ class ParticlesAnimationView @JvmOverloads constructor(context: Context, attrs: 
 
     private fun createParticles(count: Int): List<Particle> {
         val particles = ArrayList<Particle>()
-        for (i in 0..count - 1) {
+        for (i in 0 until count) {
             particles.add(Particle(width, height, this))
         }
         return particles
@@ -126,8 +126,7 @@ class ParticlesAnimationView @JvmOverloads constructor(context: Context, attrs: 
         }
 
         companion object {
-
-            private val MAX_ALPHA = 172
+            const val MAX_ALPHA = 172
         }
     }
 

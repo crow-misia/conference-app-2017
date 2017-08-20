@@ -22,7 +22,7 @@ class OverScrollLayout @JvmOverloads constructor(context: Context, attrs: Attrib
 
     private val originalRect = Rect()
 
-    private var overScrollListener: OnOverScrollListener? = null
+    var overScrollListener: OnOverScrollListener? = null
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
@@ -48,7 +48,7 @@ class OverScrollLayout @JvmOverloads constructor(context: Context, attrs: Attrib
         var appBarLayout: AppBarLayout? = null
         var scrollTop = false
         var scrollEnd = false
-        for (i in 0..childCount - 1) {
+        for (i in 0 until childCount) {
             val view = getChildAt(i)
             if (view is AppBarLayout) {
                 appBarLayout = view
@@ -67,9 +67,8 @@ class OverScrollLayout @JvmOverloads constructor(context: Context, attrs: Attrib
         }
     }
 
-    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
-        return y != originalRect.top.toFloat() || super.onNestedPreFling(target, velocityX, velocityY)
-    }
+    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float) =
+            y != originalRect.top.toFloat() || super.onNestedPreFling(target, velocityX, velocityY)
 
     override fun onStopNestedScroll(target: View) {
         super.onStopNestedScroll(target)
@@ -107,17 +106,10 @@ class OverScrollLayout @JvmOverloads constructor(context: Context, attrs: Attrib
         y += dy * 0.5f
     }
 
-    private fun isAppBarExpanded(appBarLayout: AppBarLayout): Boolean {
-        return appBarLayout.top == 0
-    }
+    private fun isAppBarExpanded(appBarLayout: AppBarLayout) = appBarLayout.top == 0
 
-    private fun isAppBarCollapsed(appBarLayout: AppBarLayout): Boolean {
-        return appBarLayout.y == (-appBarLayout.totalScrollRange).toFloat()
-    }
-
-    fun setOverScrollListener(listener: OnOverScrollListener?) {
-        overScrollListener = listener
-    }
+    private fun isAppBarCollapsed(appBarLayout: AppBarLayout) =
+            appBarLayout.y == (-appBarLayout.totalScrollRange).toFloat()
 
     interface OnOverScrollListener {
         fun onOverScroll()

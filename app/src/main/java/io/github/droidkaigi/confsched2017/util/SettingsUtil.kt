@@ -9,7 +9,6 @@ import android.provider.Settings
  * @author KeithYokoma
  */
 object SettingsUtil {
-    @JvmStatic
     fun canDrawOverlays(context: Context): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             return Settings.canDrawOverlays(context)

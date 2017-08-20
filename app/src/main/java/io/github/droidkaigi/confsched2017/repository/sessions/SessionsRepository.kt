@@ -28,9 +28,8 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
 
         if (isDirty) {
             return findAllFromRemote(locale)
-        } else {
-            return findAllFromLocal(locale)
         }
+        return findAllFromLocal(locale)
     }
 
     override fun find(sessionId: Int, locale: Locale): Maybe<Session> {
@@ -40,9 +39,8 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
 
         if (isDirty) {
             return remoteDataSource.find(sessionId, locale)
-        } else {
-            return localDataSource.find(sessionId, locale)
         }
+        return localDataSource.find(sessionId, locale)
     }
 
     override fun updateAllAsync(sessions: List<Session>) {
@@ -63,10 +61,9 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
                 .flatMap { sessions ->
                     if (sessions.isEmpty()) {
                         return@flatMap findAllFromRemote(locale)
-                    } else {
-                        refreshCache(sessions)
-                        return@flatMap Single.create<List<Session>> { it.onSuccess(sessions) }
                     }
+                    refreshCache(sessions)
+                    return@flatMap Single.create<List<Session>> { it.onSuccess(sessions) }
                 }
     }
 
@@ -88,11 +85,7 @@ class SessionsRepository @Inject constructor(private val localDataSource: Sessio
         this.isDirty = isDirty
     }
 
-    internal fun hasCacheSessions(): Boolean {
-        return !cachedSessions.isEmpty() && !isDirty
-    }
+    internal fun hasCacheSessions() = cachedSessions.isNotEmpty() && !isDirty
 
-    internal fun hasCacheSession(sessionId: Int): Boolean {
-        return cachedSessions.containsKey(sessionId) && !isDirty
-    }
+    internal fun hasCacheSession(sessionId: Int) = cachedSessions.containsKey(sessionId) && !isDirty
 }

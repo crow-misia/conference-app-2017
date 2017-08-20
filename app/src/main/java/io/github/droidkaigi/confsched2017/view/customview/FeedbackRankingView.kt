@@ -25,7 +25,17 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
 
     private val labelEnd: String
 
-    private var currentRanking: Int = 0
+    var currentRanking: Int = 0
+        set(value) {
+            if (value <= 0) {
+                unselectAll()
+            } else if (currentRanking <= binding.rankingContainer.childCount) {
+                unselectAll()
+                val view = binding.rankingContainer.getChildAt(currentRanking - 1)
+                view.isSelected = true
+                field = value
+            }
+        }
 
     private val binding = ViewFeedbackRankingBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -89,21 +99,6 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
         }
     }
 
-    fun getCurrentRanking(): Int {
-        return currentRanking
-    }
-
-    fun setCurrentRanking(currentRanking: Int) {
-        if (currentRanking <= 0) {
-            unselectAll()
-        } else if (currentRanking <= binding.rankingContainer.childCount) {
-            unselectAll()
-            val view = binding.rankingContainer.getChildAt(currentRanking - 1)
-            view.isSelected = true
-            this.currentRanking = currentRanking
-        }
-    }
-
     interface OnCurrentRankingChangeListener {
         fun onCurrentRankingChange(view: FeedbackRankingView, currentRanking: Int)
     }
@@ -114,26 +109,22 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
 
         @InverseBindingAdapter(attribute = "currentRanking")
         @JvmStatic
-        fun getCurrentRanking(view: FeedbackRankingView): Int {
-            return view.getCurrentRanking()
-        }
+        fun getCurrentRanking(view: FeedbackRankingView): Int = view.currentRanking
 
         @BindingAdapter("currentRanking")
         @JvmStatic
         fun setCurrentRanking(view: FeedbackRankingView, currentRanking: Int) {
-            if (currentRanking != view.getCurrentRanking()) {
-                view.setCurrentRanking(currentRanking)
+            if (currentRanking != view.currentRanking) {
+                view.currentRanking = currentRanking
             }
         }
 
         @BindingAdapter("currentRankingAttrChanged")
         @JvmStatic
         fun setCurrentRankingAttrChanged(view: FeedbackRankingView, listener: InverseBindingListener?) {
-            view.listener = listener?.let {
-                object : OnCurrentRankingChangeListener {
-                    override fun onCurrentRankingChange(view: FeedbackRankingView, currentRanking: Int) {
-                        it.onChange()
-                    }
+            listener?.let {
+                view.listener = object : OnCurrentRankingChangeListener {
+                    override fun onCurrentRankingChange(view: FeedbackRankingView, currentRanking: Int) = it.onChange()
                 }
             }
         }

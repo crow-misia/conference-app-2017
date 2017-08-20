@@ -63,9 +63,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
         inflater?.inflate(R.menu.menu_search, menu)
         val menuItem = menu?.findItem(R.id.action_search)
         menuItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                return true
-            }
+            override fun onMenuItemActionExpand(item: MenuItem) = true
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 val activity = activity
@@ -76,9 +74,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
         val searchView = menuItem?.actionView as SearchView
         searchView.queryHint = getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return onQueryTextChange(query)
-            }
+            override fun onQueryTextSubmit(query: String) = onQueryTextChange(query)
 
             override fun onQueryTextChange(newText: String): Boolean {
                 adapter.previousSearchText = newText

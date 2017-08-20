@@ -49,9 +49,7 @@ class DebugOverlayService : BaseService() {
         manager.create()
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent: Intent, @ServiceFlags flags: Int, startId: Int): Int {
         Timber.d("onStartCommand")

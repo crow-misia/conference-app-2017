@@ -23,8 +23,6 @@ class LicensesActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context): Intent {
-            return Intent(context, LicensesActivity::class.java)
-        }
+        fun createIntent(context: Context) = Intent(context, LicensesActivity::class.java)
     }
 }

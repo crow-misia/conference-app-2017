@@ -16,13 +16,9 @@ import timber.log.Timber
 @Singleton
 open class ResourceResolver @Inject constructor(private val context: Context) {
 
-    open fun getString(@StringRes resId: Int): String {
-        return context.getString(resId)
-    }
+    open fun getString(@StringRes resId: Int): String = context.getString(resId)
 
-    open fun getString(@StringRes resId: Int, vararg formatArgs: Any): String {
-        return context.getString(resId, *formatArgs)
-    }
+    open fun getString(@StringRes resId: Int, vararg formatArgs: Any): String = context.getString(resId, *formatArgs)
 
     open fun loadJSONFromAsset(jsonFileName: String): String? {
         try {

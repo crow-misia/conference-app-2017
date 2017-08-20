@@ -19,19 +19,17 @@ import timber.log.Timber
 object LocaleUtil {
 
     private val DEFAULT_LANG = Locale.ENGLISH
-    @JvmStatic
+
     val SUPPORT_LANG = arrayListOf(Locale.JAPANESE, Locale.ENGLISH)
 
     private val TAG = LocaleUtil::class.java.simpleName
 
     private val CONFERENCE_TIMEZONE = TimeZone.getTimeZone(BuildConfig.CONFERENCE_TIMEZONE)
 
-    @JvmStatic
     fun initLocale(context: Context) {
         setLocale(context, getCurrentLanguageId(context))
     }
 
-    @JvmStatic
     fun setLocale(context: Context, languageId: String) {
         val config = context.resources.configuration
         DefaultPrefs.get(context).putLanguageId(languageId)
@@ -52,7 +50,6 @@ object LocaleUtil {
         }
     }
 
-    @JvmStatic
     fun getCurrentLanguageId(context: Context): String {
         // This value would be stored language id or empty.
         var languageId = DefaultPrefs.get(context).languageId
@@ -63,17 +60,10 @@ object LocaleUtil {
         return if (SUPPORT_LANG.any { TextUtils.equals(languageId, LocaleUtil.getLocaleLanguageId(it)) }) languageId else LocaleUtil.getLocaleLanguageId(DEFAULT_LANG)
     }
 
-    @JvmStatic
-    fun getLocaleLanguageId(locale: Locale): String {
-        return locale.language.toLowerCase()
-    }
+    fun getLocaleLanguageId(locale: Locale) = locale.language.toLowerCase()
 
-    @JvmStatic
-    fun getCurrentLanguage(context: Context): String {
-        return context.getString(getLanguage(LocaleUtil.getCurrentLanguageId(context)))
-    }
+    fun getCurrentLanguage(context: Context): String = context.getString(getLanguage(LocaleUtil.getCurrentLanguageId(context)))
 
-    @JvmStatic
     fun getDisplayLanguage(context: Context, locale: Locale): String {
         val languageId = getLocaleLanguageId(locale)
         return getDisplayLanguage(context, "lang_" + languageId + "_in_" + languageId)
@@ -81,14 +71,12 @@ object LocaleUtil {
 
     private fun getDisplayLanguage(context: Context, resName: String): String {
         try {
-            val resourceId = context.resources.getIdentifier(
-                    resName, "string", context.packageName)
+            val resourceId = context.resources.getIdentifier(resName, "string", context.packageName)
             if (resourceId > 0) {
                 return context.getString(resourceId)
-            } else {
-                Timber.tag(TAG).d("String resource id: %s is not found.", resName)
-                return ""
             }
+            Timber.tag(TAG).d("String resource id: %s is not found.", resName)
+            return ""
         } catch (e: Exception) {
             Timber.tag(TAG).e(e, "String resource id: %s is not found.", resName)
             return ""
@@ -100,11 +88,11 @@ object LocaleUtil {
     fun getLanguage(languageId: String): Int {
         if (TextUtils.equals(languageId, getLocaleLanguageId(Locale.ENGLISH))) {
             return R.string.lang_en
-        } else if (TextUtils.equals(languageId, getLocaleLanguageId(Locale.JAPANESE))) {
-            return R.string.lang_ja
-        } else {
-            return R.string.lang_en
         }
+        if (TextUtils.equals(languageId, getLocaleLanguageId(Locale.JAPANESE))) {
+            return R.string.lang_ja
+        }
+        return R.string.lang_en
     }
 
     fun getDisplayDate(date: Date, context: Context): Date {
