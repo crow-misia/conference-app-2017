@@ -1,8 +1,5 @@
 package io.github.droidkaigi.confsched2017.view.fragment
 
-import com.sys1yagi.fragmentcreator.annotation.Args
-import com.sys1yagi.fragmentcreator.annotation.FragmentCreator
-
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
@@ -10,12 +7,14 @@ import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hannesdorfmann.fragmentargs.FragmentArgs
+import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 
 import javax.inject.Inject
 
@@ -30,7 +29,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-@FragmentCreator
+@FragmentWithArgs
 class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
 
     @Inject
@@ -39,14 +38,14 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
 
-    @Args @JvmField
-    internal var sessionId: Int = 0
+    @Arg
+    var sessionId: Int = 0
 
     private lateinit var binding: FragmentSessionDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SessionDetailFragmentCreator.read(this)
+        FragmentArgs.inject(this)
     }
 
     override fun onStop() {

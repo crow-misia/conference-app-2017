@@ -1,8 +1,5 @@
 package io.github.droidkaigi.confsched2017.view.fragment
 
-import com.sys1yagi.fragmentcreator.annotation.Args
-import com.sys1yagi.fragmentcreator.annotation.FragmentCreator
-
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.StringRes
@@ -12,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.hannesdorfmann.fragmentargs.FragmentArgs
+import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 
 import javax.inject.Inject
 
@@ -20,20 +20,20 @@ import io.github.droidkaigi.confsched2017.databinding.FragmentSessionFeedbackBin
 import io.github.droidkaigi.confsched2017.model.SessionFeedback
 import io.github.droidkaigi.confsched2017.viewmodel.SessionFeedbackViewModel
 
-@FragmentCreator
+@FragmentWithArgs
 class SessionFeedbackFragment : BaseFragment(), SessionFeedbackViewModel.Callback {
 
     @Inject
     lateinit var viewModel: SessionFeedbackViewModel
 
-    @Args @JvmField
-    internal var sessionId: Int = 0
+    @Arg
+    var sessionId: Int = 0
 
     private lateinit var binding: FragmentSessionFeedbackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SessionFeedbackFragmentCreator.read(this)
+        FragmentArgs.inject(this)
         viewModel.callback = this
         viewModel.findSession(sessionId)
     }

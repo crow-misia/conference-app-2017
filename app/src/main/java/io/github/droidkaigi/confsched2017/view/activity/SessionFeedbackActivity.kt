@@ -7,7 +7,7 @@ import android.os.Bundle
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivitySessionFeedbackBinding
-import io.github.droidkaigi.confsched2017.view.fragment.SessionFeedbackFragmentCreator
+import io.github.droidkaigi.confsched2017.view.fragment.SessionFeedbackFragmentBuilder
 
 class SessionFeedbackActivity : BaseActivity() {
 
@@ -21,7 +21,7 @@ class SessionFeedbackActivity : BaseActivity() {
         initBackToolbar(binding.toolbar)
 
         val sessionId = intent.getIntExtra(EXTRA_SESSION_ID, 0)
-        replaceFragment(SessionFeedbackFragmentCreator.newBuilder(sessionId).build(), R.id.content_view)
+        replaceFragment(SessionFeedbackFragmentBuilder(sessionId).build(), R.id.content_view)
     }
 
     companion object {

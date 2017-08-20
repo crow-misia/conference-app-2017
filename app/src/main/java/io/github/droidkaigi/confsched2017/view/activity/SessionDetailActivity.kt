@@ -10,7 +10,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 
 import io.github.droidkaigi.confsched2017.R
-import io.github.droidkaigi.confsched2017.view.fragment.SessionDetailFragmentCreator
+import io.github.droidkaigi.confsched2017.view.fragment.SessionDetailFragmentBuilder
 import timber.log.Timber
 
 class SessionDetailActivity : BaseActivity() {
@@ -34,7 +34,7 @@ class SessionDetailActivity : BaseActivity() {
             }
 
         }
-        replaceFragment(SessionDetailFragmentCreator.newBuilder(sessionId).build(), R.id.content_view)
+        replaceFragment(SessionDetailFragmentBuilder(sessionId).build(), R.id.content_view)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
