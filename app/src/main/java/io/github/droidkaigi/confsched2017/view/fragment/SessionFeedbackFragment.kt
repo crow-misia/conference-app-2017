@@ -3,7 +3,6 @@ package io.github.droidkaigi.confsched2017.view.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View

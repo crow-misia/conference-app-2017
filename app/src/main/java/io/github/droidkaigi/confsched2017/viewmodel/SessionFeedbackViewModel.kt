@@ -18,7 +18,6 @@ import io.github.droidkaigi.confsched2017.repository.sessions.SessionsRepository
 import io.github.droidkaigi.confsched2017.view.helper.Navigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -149,9 +148,7 @@ class SessionFeedbackViewModel @Inject internal constructor(
     }
 
     @Bindable
-    fun getSessionTitle(): String {
-        return sessionTitle ?: ""
-    }
+    fun getSessionTitle() = sessionTitle ?: ""
 
     fun setSessionTitle(sessionTitle: String) {
         this.sessionTitle = sessionTitle

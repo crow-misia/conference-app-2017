@@ -15,7 +15,7 @@ class SessionFeedbackActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivitySessionFeedbackBinding>(this, R.layout.activity_session_feedback)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_session_feedback)
         component.inject(this)
 
         initBackToolbar(binding.toolbar)

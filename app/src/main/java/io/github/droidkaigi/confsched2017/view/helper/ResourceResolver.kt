@@ -4,12 +4,10 @@ import android.content.Context
 import android.support.annotation.StringRes
 
 import java.io.IOException
-import java.io.InputStream
 
 import javax.inject.Inject
 import javax.inject.Singleton
 
-import okio.BufferedSource
 import okio.Okio
 import timber.log.Timber
 

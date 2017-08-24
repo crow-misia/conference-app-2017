@@ -6,13 +6,11 @@ import org.lucasr.twowayview.widget.SpannableGridLayoutManager
 
 import android.content.Context
 import android.graphics.Point
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.view.Display
 import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.Menu
@@ -24,7 +22,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 
-import java.util.Date
 import java.util.Locale
 
 import javax.inject.Inject
@@ -43,7 +40,6 @@ import io.github.droidkaigi.confsched2017.viewmodel.SessionViewModel
 import io.github.droidkaigi.confsched2017.viewmodel.SessionsViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

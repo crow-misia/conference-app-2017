@@ -3,7 +3,7 @@ package io.github.droidkaigi.confsched2017.viewmodel
 import io.github.droidkaigi.confsched2017.util.DummyCreator
 import org.junit.Test
 
-import org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions.assertThat
 
 class TopicColorTest {
 

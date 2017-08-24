@@ -1,6 +1,5 @@
 package io.github.droidkaigi.confsched2017.viewmodel
 
-import android.content.Context
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -59,7 +58,7 @@ class ContributorsViewModelTest {
 
     @Before
     fun setUp() {
-        navigator = mock<Navigator>()
+        navigator = mock()
         viewModel = ContributorsViewModel(
                 resourceResolver, navigator, toolbarViewModel, repository, CompositeDisposable())
     }

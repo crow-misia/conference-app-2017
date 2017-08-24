@@ -15,7 +15,7 @@ class LicensesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityLicensesBinding>(this, R.layout.activity_licenses)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_licenses)
         component.inject(this)
 
         initBackToolbar(binding.toolbar)

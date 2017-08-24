@@ -23,9 +23,8 @@ class ContributorsRepository @Inject internal constructor(private val localDataS
 
         if (dirty) {
             return findAllFromRemote()
-        } else {
-            return findAllFromLocal()
         }
+        return findAllFromLocal()
     }
 
     private fun findAllFromRemote(): Single<List<Contributor>> =

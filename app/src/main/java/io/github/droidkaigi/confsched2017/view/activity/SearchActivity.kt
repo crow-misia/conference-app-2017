@@ -16,7 +16,7 @@ class SearchActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, R.anim.activity_fade_exit)
-        binding = DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
 
         initBackToolbar(binding.toolbar)
         replaceFragment(SearchFragment.newInstance(), R.id.content_view)

@@ -73,15 +73,14 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
 
     private fun addRankingViews() {
         for (i in 1..maxSize) {
-            val number = i
             val view = LayoutInflater.from(context)
                     .inflate(R.layout.view_feedback_ranking_item, binding.rankingContainer, false)
             val txtRanking = view.findViewById<TextView>(R.id.txt_ranking)
-            txtRanking.text = number.toString()
+            txtRanking.text = i.toString()
             txtRanking.setOnClickListener { v ->
                 unselectAll()
                 v.isSelected = true
-                currentRanking = number
+                currentRanking = i
                 listener?.onCurrentRankingChange(this, currentRanking)
             }
 

@@ -28,7 +28,6 @@ import io.github.droidkaigi.confsched2017.viewmodel.SearchResultViewModel
 import io.github.droidkaigi.confsched2017.viewmodel.SearchViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

@@ -5,11 +5,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
-import io.github.droidkaigi.confsched2017.model.Room_Relation
 import io.github.droidkaigi.confsched2017.model.Session
-import io.github.droidkaigi.confsched2017.model.Session_Relation
-import io.github.droidkaigi.confsched2017.model.Speaker_Relation
-import io.github.droidkaigi.confsched2017.model.Topic_Relation
 import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

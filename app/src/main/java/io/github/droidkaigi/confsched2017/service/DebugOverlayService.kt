@@ -2,7 +2,6 @@ package io.github.droidkaigi.confsched2017.service
 
 import android.app.Service
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter

@@ -1,6 +1,5 @@
 package io.github.droidkaigi.confsched2017.viewmodel
 
-import android.content.Context
 import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
@@ -17,7 +16,6 @@ import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
 import org.mockito.Mockito.never
-import org.robolectric.RuntimeEnvironment
 
 class SponsorshipsViewModelTest {
 

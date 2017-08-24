@@ -12,7 +12,6 @@ import javax.inject.Singleton
 import io.github.droidkaigi.confsched2017.model.Session
 import io.reactivex.Maybe
 import io.reactivex.Single
-import io.reactivex.SingleEmitter
 
 @Singleton
 class SessionsRepository @Inject constructor(private val localDataSource: SessionsLocalDataSource, private val remoteDataSource: SessionsRemoteDataSource) : SessionsDataSource {

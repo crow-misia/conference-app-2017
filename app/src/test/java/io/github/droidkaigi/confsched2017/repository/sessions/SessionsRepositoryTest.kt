@@ -279,7 +279,7 @@ class SessionsRepositoryTest {
                     assertThat(values().first().id).isEqualTo(12)
                     assertComplete()
                     verify(cachedSessions, never()).get(eq(12))
-                    verify(client, never()).getSessions(any<Locale>())
+                    verify(client, never()).getSessions(any())
                 }
     }
 

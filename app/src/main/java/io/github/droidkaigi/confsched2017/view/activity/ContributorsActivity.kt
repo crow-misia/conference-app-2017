@@ -23,7 +23,7 @@ class ContributorsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         component.inject(this)
 
-        binding = DataBindingUtil.setContentView<ActivityContributorsBinding>(this, R.layout.activity_contributors)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contributors)
         binding.viewModel = viewModel
 
         initBackToolbar(binding.toolbar)

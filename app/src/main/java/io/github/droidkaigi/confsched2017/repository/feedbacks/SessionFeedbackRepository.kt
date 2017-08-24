@@ -4,8 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 import io.github.droidkaigi.confsched2017.model.SessionFeedback
-import io.reactivex.Single
-import retrofit2.Response
 
 @Singleton
 class SessionFeedbackRepository @Inject constructor(

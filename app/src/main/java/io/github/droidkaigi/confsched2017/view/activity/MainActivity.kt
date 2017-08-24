@@ -5,7 +5,6 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 
 import io.github.droidkaigi.confsched2017.R
@@ -33,7 +32,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         LocaleUtil.initLocale(this)
 
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         component.inject(this)
 

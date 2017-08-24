@@ -1,12 +1,9 @@
 package io.github.droidkaigi.confsched2017.view.customview
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.databinding.DataBindingUtil
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.CompoundButton
 import android.widget.RelativeLayout
 
@@ -68,9 +65,5 @@ class SettingSwitchRowView @JvmOverloads constructor(context: Context, attrs: At
             binding.settingTitle.setTextColor(disabledTextColor)
             binding.settingDescription.setTextColor(disabledTextColor)
         }
-    }
-
-    companion object {
-        private val TAG = SettingSwitchRowView::class.java.simpleName
     }
 }

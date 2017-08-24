@@ -7,7 +7,6 @@ import io.github.droidkaigi.confsched2017.util.DummyCreator
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
-import org.mockito.Mockito
 
 class MySessionsRepositoryTest {
 

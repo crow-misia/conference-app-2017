@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 import io.github.droidkaigi.confsched2017.databinding.FragmentSplashBinding

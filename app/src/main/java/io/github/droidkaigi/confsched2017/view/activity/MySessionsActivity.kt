@@ -15,7 +15,7 @@ class MySessionsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMySessionsBinding>(this, R.layout.activity_my_sessions)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_my_sessions)
         component.inject(this)
 
         initBackToolbar(binding.toolbar)

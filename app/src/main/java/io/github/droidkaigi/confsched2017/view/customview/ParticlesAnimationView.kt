@@ -141,7 +141,7 @@ class ParticlesAnimationView @JvmOverloads constructor(context: Context, attrs: 
 
         internal val path = Path()
 
-        internal constructor(maxWidth: Int, maxHeight: Int, view: View) : this(maxWidth, maxHeight, view.width, view.height) {}
+        internal constructor(maxWidth: Int, maxHeight: Int, view: View) : this(maxWidth, maxHeight, view.width, view.height)
 
         init {
             reset(maxWidth, maxHeight)

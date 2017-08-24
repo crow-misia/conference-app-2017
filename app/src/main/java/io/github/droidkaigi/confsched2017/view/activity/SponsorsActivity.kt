@@ -15,7 +15,7 @@ class SponsorsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivitySponsorsBinding>(this, R.layout.activity_sponsors)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sponsors)
         component.inject(this)
 
         initBackToolbar(binding.toolbar)

@@ -4,8 +4,6 @@ import android.content.Context
 import android.databinding.BaseObservable
 import android.view.View
 
-import java.util.Date
-
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.model.MySession
 import io.github.droidkaigi.confsched2017.model.Session

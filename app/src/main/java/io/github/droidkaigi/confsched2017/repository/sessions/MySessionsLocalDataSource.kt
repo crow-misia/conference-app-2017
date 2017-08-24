@@ -3,7 +3,6 @@ package io.github.droidkaigi.confsched2017.repository.sessions
 import javax.inject.Inject
 
 import io.github.droidkaigi.confsched2017.model.MySession
-import io.github.droidkaigi.confsched2017.model.MySession_Relation
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
 import io.github.droidkaigi.confsched2017.model.Session
 import io.reactivex.Completable

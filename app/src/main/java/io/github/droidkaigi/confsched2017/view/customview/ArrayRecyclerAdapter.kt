@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 
 import java.util.ArrayList
 
-abstract class ArrayRecyclerAdapter<T, VH : RecyclerView.ViewHolder> @JvmOverloads constructor(val context: Context, protected val list: MutableList<T> = ArrayList<T>()) : RecyclerView.Adapter<VH>() {
+abstract class ArrayRecyclerAdapter<T, VH : RecyclerView.ViewHolder> @JvmOverloads constructor(val context: Context, protected val list: MutableList<T> = arrayListOf()) : RecyclerView.Adapter<VH>() {
 
     @UiThread
     fun reset(items: Collection<T>) {

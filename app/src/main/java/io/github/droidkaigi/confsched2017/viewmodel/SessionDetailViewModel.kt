@@ -104,20 +104,15 @@ class SessionDetailViewModel @Inject constructor(
 
     var callback: Callback? = null
 
-    fun loadSession(sessionId: Int): Completable {
-        return sessionsRepository.find(sessionId, Locale.getDefault())
-                .flatMapCompletable {
-                    session = it
-                    Completable.complete()
-                }
-    }
+    fun loadSession(sessionId: Int): Completable = sessionsRepository.find(sessionId, Locale.getDefault())
+            .flatMapCompletable {
+                session = it
+                Completable.complete()
+            }
 
-    private fun decideLanguageResId(locale: Locale): Int {
-        if (locale == Locale.JAPANESE) {
-            return R.string.lang_ja
-        } else {
-            return R.string.lang_en
-        }
+    private fun decideLanguageResId(locale: Locale): Int = when (locale) {
+        Locale.JAPANESE -> R.string.lang_ja
+        else -> R.string.lang_en
     }
 
     override fun destroy() {
