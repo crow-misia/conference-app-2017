@@ -35,12 +35,10 @@ class SearchResultViewModel private constructor(private var text: String, val ty
     }
 
     fun onItemClick(view: View) {
-        navigator.navigateToSessionDetail(session, SearchActivity::class.java)
+        navigator.navigateToSessionDetail(session, SearchActivity::class)
     }
 
-    fun match(filterPattern: String): Boolean {
-        return text.toLowerCase().contains(filterPattern)
-    }
+    fun match(filterPattern: String) = text.toLowerCase().contains(filterPattern)
 
     val iconResId: Int
         @DrawableRes

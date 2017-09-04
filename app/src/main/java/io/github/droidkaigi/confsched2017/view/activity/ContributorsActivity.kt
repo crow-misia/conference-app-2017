@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivityContributorsBinding
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.ContributorsFragment
 import io.github.droidkaigi.confsched2017.viewmodel.ToolbarViewModel
 
@@ -32,6 +33,6 @@ class ContributorsActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context) = Intent(context, ContributorsActivity::class.java)
+        fun createIntent(context: Context) = context.intentFor<ContributorsActivity>()
     }
 }

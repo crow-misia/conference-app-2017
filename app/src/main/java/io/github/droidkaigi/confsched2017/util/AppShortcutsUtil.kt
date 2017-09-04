@@ -20,7 +20,7 @@ object AppShortcutsUtil {
     fun addShortcuts(context: Context) {
         val shortcutManager = context.getSystemService(Context.SHORTCUT_SERVICE) as ShortcutManager?
 
-        val intents = arrayOf(Intent(context.applicationContext, MainActivity::class.java).setAction(Intent.ACTION_DEFAULT), Intent(context.applicationContext, SearchActivity::class.java).setAction(Intent.ACTION_DEFAULT))
+        val intents = arrayOf(context.applicationContext.intentFor<MainActivity>().setAction(Intent.ACTION_DEFAULT), context.applicationContext.intentFor<SearchActivity>().setAction(Intent.ACTION_DEFAULT))
 
         val shortcutInfo = ShortcutInfo.Builder(context, APP_SHORTCUTS_SEARCH_ID)
                 .setShortLabel(context.getString(R.string.shortcut_search_title))

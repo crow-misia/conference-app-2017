@@ -36,5 +36,5 @@ class MySessionViewModel(context: Context, private val navigator: Navigator, var
                 DateUtil.getMinutes(displaySTime, displayETime))
     }
 
-    fun onItemClick(view: View) = navigator.navigateToSessionDetail(mySession.session, MySessionsActivity::class.java)
+    fun onItemClick(view: View) = navigator.navigateToSessionDetail(mySession.session, MySessionsActivity::class)
 }

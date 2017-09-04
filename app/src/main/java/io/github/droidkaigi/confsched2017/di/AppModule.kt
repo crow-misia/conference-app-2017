@@ -19,6 +19,7 @@ import io.github.droidkaigi.confsched2017.api.service.GithubService
 import io.github.droidkaigi.confsched2017.api.service.GoogleFormService
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
 import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
+import io.github.droidkaigi.confsched2017.util.create
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -54,34 +55,34 @@ class AppModule(private val app: Application) {
 
     @Singleton
     @Provides
-    fun provideDroidKaigiService(client: OkHttpClient) =
+    fun provideDroidKaigiService(client: OkHttpClient): DroidKaigiService =
         Retrofit.Builder()
                 .client(client)
                 .baseUrl(BuildConfig.API_ROOT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
-                .create(DroidKaigiService::class.java)
+                .create()
 
     @Singleton
     @Provides
-    fun provideGithubService(client: OkHttpClient) =
+    fun provideGithubService(client: OkHttpClient): GithubService =
         Retrofit.Builder().client(client)
                 .baseUrl("https://api.github.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
-                .create(GithubService::class.java)
+                .create()
 
     @Singleton
     @Provides
-    fun provideGoogleFormService(client: OkHttpClient) =
+    fun provideGoogleFormService(client: OkHttpClient): GoogleFormService =
         Retrofit.Builder().client(client)
                 .baseUrl("https://docs.google.com/forms/d/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .build()
-                .create(GoogleFormService::class.java)
+                .create()
 
     companion object {
         private fun createGson() = GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create()

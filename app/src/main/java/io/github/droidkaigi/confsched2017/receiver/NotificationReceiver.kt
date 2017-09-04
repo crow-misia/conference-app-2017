@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.activity.MainActivity
 import io.github.droidkaigi.confsched2017.view.activity.SessionDetailActivity
 import timber.log.Timber
@@ -60,7 +61,7 @@ class NotificationReceiver : BroadcastReceiver() {
         val title = intent.getStringExtra(KEY_TITLE)
         val text = intent.getStringExtra(KEY_TEXT)
         val priority = if (headsUp) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_DEFAULT
-        val openIntent = SessionDetailActivity.createIntent(context, sessionId, MainActivity::class.java)
+        val openIntent = SessionDetailActivity.createIntent(context, sessionId, MainActivity::class)
         openIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         val pendingIntent = PendingIntent.getActivity(context, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val builder = NotificationCompat.Builder(context, "")
@@ -94,12 +95,10 @@ class NotificationReceiver : BroadcastReceiver() {
         const val GROUP_NAME = "droidkaigi"
         const val GROUP_NOTIFICATION_ID = 0
 
-        fun createIntent(context: Context, sessionId: Int, title: String, text: String): Intent {
-            val intent = Intent(context, NotificationReceiver::class.java)
-            intent.putExtra(NotificationReceiver.KEY_SESSION_ID, sessionId)
-            intent.putExtra(NotificationReceiver.KEY_TITLE, title)
-            intent.putExtra(NotificationReceiver.KEY_TEXT, text)
-            return intent
-        }
+        fun createIntent(context: Context, sessionId: Int, title: String, text: String): Intent =
+                context.intentFor<NotificationReceiver>()
+                        .putExtra(NotificationReceiver.KEY_SESSION_ID, sessionId)
+                        .putExtra(NotificationReceiver.KEY_TITLE, title)
+                        .putExtra(NotificationReceiver.KEY_TEXT, text)
     }
 }

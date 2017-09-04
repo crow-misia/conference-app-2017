@@ -7,6 +7,7 @@ import android.os.Bundle
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivityMySessionsBinding
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.MySessionsFragment
 
 class MySessionsActivity : BaseActivity() {
@@ -23,6 +24,6 @@ class MySessionsActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context) = Intent(context, MySessionsActivity::class.java)
+        fun createIntent(context: Context) = context.intentFor<MySessionsActivity>()
     }
 }

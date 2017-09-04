@@ -25,6 +25,7 @@ import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
 import io.github.droidkaigi.confsched2017.service.DebugOverlayService
 import io.github.droidkaigi.confsched2017.util.AppShortcutsUtil
 import io.github.droidkaigi.confsched2017.util.LocaleUtil
+import io.github.droidkaigi.confsched2017.util.intentFor
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
@@ -67,7 +68,7 @@ open class MainApplication : Application() {
         LocaleUtil.initLocale(this)
 
         if (defaultPrefs.showDebugOverlayView) {
-            startService(Intent(this, DebugOverlayService::class.java))
+            startService(intentFor<DebugOverlayService>())
         }
         initDebot()
     }

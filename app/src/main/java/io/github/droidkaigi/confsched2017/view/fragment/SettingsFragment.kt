@@ -17,6 +17,7 @@ import io.github.droidkaigi.confsched2017.databinding.FragmentSettingsBinding
 import io.github.droidkaigi.confsched2017.service.DebugOverlayService
 import io.github.droidkaigi.confsched2017.util.LocaleUtil
 import io.github.droidkaigi.confsched2017.util.SettingsUtil
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.activity.MainActivity
 import io.github.droidkaigi.confsched2017.viewmodel.SettingsViewModel
 import timber.log.Timber
@@ -98,9 +99,9 @@ class SettingsFragment : BaseFragment(), SettingsViewModel.Callback {
             return
         }
         if (enabled) {
-            context.startService(Intent(context, DebugOverlayService::class.java))
+            context.startService(context.intentFor<DebugOverlayService>())
         } else {
-            context.stopService(Intent(context, DebugOverlayService::class.java))
+            context.stopService(context.intentFor<DebugOverlayService>())
         }
     }
 

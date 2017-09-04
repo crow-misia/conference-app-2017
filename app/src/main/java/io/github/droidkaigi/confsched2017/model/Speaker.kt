@@ -48,7 +48,6 @@ class Speaker @Setter constructor(
         }
 
     private companion object {
-
-        val TAG = Speaker::class.java.simpleName
+        private val TAG = Speaker::class.java.simpleName
     }
 }

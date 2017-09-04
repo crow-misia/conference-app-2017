@@ -151,7 +151,7 @@ class SessionViewModel : BaseObservable, ViewModel {
         get() = session.stime
 
     fun showSessionDetail(view: View) {
-        navigator?.navigateToSessionDetail(session, MainActivity::class.java)
+        navigator?.navigateToSessionDetail(session, MainActivity::class)
     }
 
     fun checkSession(view: View): Boolean {
@@ -184,9 +184,7 @@ class SessionViewModel : BaseObservable, ViewModel {
     }
 
     @Bindable
-    fun getCheckVisibility(): Int {
-        return checkVisibility
-    }
+    fun getCheckVisibility() = checkVisibility
 
     private fun setCheckVisibility(visibility: Int) {
         checkVisibility = visibility
@@ -196,8 +194,6 @@ class SessionViewModel : BaseObservable, ViewModel {
     companion object {
         private val TAG = SessionViewModel::class.java.simpleName
 
-        @JvmOverloads internal fun createEmpty(rowSpan: Int, colSpan: Int = 1): SessionViewModel {
-            return SessionViewModel(rowSpan, colSpan)
-        }
+        @JvmOverloads internal fun createEmpty(rowSpan: Int, colSpan: Int = 1) = SessionViewModel(rowSpan, colSpan)
     }
 }

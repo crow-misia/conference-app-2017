@@ -7,6 +7,7 @@ import android.os.Bundle
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivitySessionFeedbackBinding
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.SessionFeedbackFragmentBuilder
 
 class SessionFeedbackActivity : BaseActivity() {
@@ -27,10 +28,8 @@ class SessionFeedbackActivity : BaseActivity() {
     companion object {
         const val EXTRA_SESSION_ID = "session_id"
 
-        fun createIntent(context: Context, sessionId: Int): Intent {
-            val intent = Intent(context, SessionFeedbackActivity::class.java)
-            intent.putExtra(EXTRA_SESSION_ID, sessionId)
-            return intent
-        }
+        fun createIntent(context: Context, sessionId: Int): Intent =
+                context.intentFor<SessionFeedbackActivity>()
+                        .putExtra(EXTRA_SESSION_ID, sessionId)
     }
 }

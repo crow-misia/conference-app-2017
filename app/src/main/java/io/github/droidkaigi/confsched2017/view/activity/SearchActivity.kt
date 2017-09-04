@@ -7,6 +7,7 @@ import android.os.Bundle
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivitySearchBinding
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.SearchFragment
 
 class SearchActivity : BaseActivity() {
@@ -32,6 +33,6 @@ class SearchActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context) = Intent(context, SearchActivity::class.java)
+        fun createIntent(context: Context) = context.intentFor<SearchActivity>()
     }
 }

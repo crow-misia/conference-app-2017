@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivityMainBinding
 import io.github.droidkaigi.confsched2017.util.LocaleUtil
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.InformationFragment
 import io.github.droidkaigi.confsched2017.view.fragment.MapFragment
 import io.github.droidkaigi.confsched2017.view.fragment.SessionsFragment
@@ -104,6 +105,6 @@ class MainActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
+        fun createIntent(context: Context) = context.intentFor<MainActivity>()
     }
 }

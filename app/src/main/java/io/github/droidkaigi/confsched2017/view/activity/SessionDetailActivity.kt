@@ -10,8 +10,10 @@ import android.text.TextUtils
 import android.view.MenuItem
 
 import io.github.droidkaigi.confsched2017.R
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.SessionDetailFragmentBuilder
 import timber.log.Timber
+import kotlin.reflect.KClass
 
 class SessionDetailActivity : BaseActivity() {
 
@@ -58,12 +60,10 @@ class SessionDetailActivity : BaseActivity() {
         const val EXTRA_SESSION_ID = "session_id"
         const val EXTRA_PARENT = "parent"
 
-        fun createIntent(context: Context, sessionId: Int, parentClass: Class<out Activity>?): Intent {
-            val intent = Intent(context, SessionDetailActivity::class.java)
-            intent.putExtra(EXTRA_SESSION_ID, sessionId)
-            if (parentClass != null) {
-                intent.putExtra(EXTRA_PARENT, parentClass.name)
-            }
+        fun createIntent(context: Context, sessionId: Int, parentClass: KClass<out Activity>?): Intent {
+            val intent = context.intentFor<SessionDetailActivity>()
+                    .putExtra(EXTRA_SESSION_ID, sessionId)
+            parentClass?.also { intent.putExtra(EXTRA_PARENT, parentClass.java.name) }
             return intent
         }
     }

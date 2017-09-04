@@ -7,6 +7,7 @@ import android.os.Bundle
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.databinding.ActivityLicensesBinding
+import io.github.droidkaigi.confsched2017.util.intentFor
 import io.github.droidkaigi.confsched2017.view.fragment.LicensesFragment
 
 class LicensesActivity : BaseActivity() {
@@ -23,6 +24,6 @@ class LicensesActivity : BaseActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context) = Intent(context, LicensesActivity::class.java)
+        fun createIntent(context: Context) = context.intentFor<LicensesActivity>()
     }
 }

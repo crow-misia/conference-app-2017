@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 import io.github.droidkaigi.confsched2017.R
 import io.github.droidkaigi.confsched2017.model.Sponsorship
+import io.github.droidkaigi.confsched2017.util.fromJson
 import io.github.droidkaigi.confsched2017.view.helper.ResourceResolver
 import io.github.droidkaigi.confsched2017.view.helper.Navigator
 import io.reactivex.Single
@@ -50,9 +51,7 @@ class SponsorshipsViewModel @Inject internal constructor(
      */
     private fun transformSponsorships(json: String?): List<Sponsorship> =
         json?.let {
-            val gson = Gson()
-            val listType = object : TypeToken<List<Sponsorship>>() { }.type
-            return gson.fromJson(json, listType)
+            return Gson().fromJson(it)
         } ?: emptyList()
 
     private fun convertToViewModel(sponsorships: List<Sponsorship>) =

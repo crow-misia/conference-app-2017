@@ -20,6 +20,7 @@ import io.github.droidkaigi.confsched2017.view.activity.LicensesActivity
 import io.github.droidkaigi.confsched2017.view.activity.SessionDetailActivity
 import io.github.droidkaigi.confsched2017.view.activity.SessionFeedbackActivity
 import io.github.droidkaigi.confsched2017.view.activity.SponsorsActivity
+import kotlin.reflect.KClass
 
 /**
  * Created by shihochan on 2017/02/15.
@@ -28,7 +29,7 @@ import io.github.droidkaigi.confsched2017.view.activity.SponsorsActivity
 @ActivityScope
 class Navigator @Inject constructor(private val activity: AppCompatActivity) {
 
-    fun navigateToSessionDetail(session: Session, parentClass: Class<out Activity>?) {
+    fun navigateToSessionDetail(session: Session, parentClass: KClass<out Activity>?) {
         activity.startActivity(SessionDetailActivity.createIntent(activity, session.id, parentClass))
     }
 
