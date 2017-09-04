@@ -29,10 +29,9 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
         set(value) {
             if (value <= 0) {
                 unselectAll()
-            } else if (currentRanking <= binding.rankingContainer.childCount) {
+            } else if (value <= binding.rankingContainer.childCount) {
                 unselectAll()
-                val view = binding.rankingContainer.getChildAt(currentRanking - 1)
-                view.isSelected = true
+                binding.rankingContainer.getChildAt(value - 1).isSelected = true
                 field = value
             }
         }
@@ -77,9 +76,7 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
                     .inflate(R.layout.view_feedback_ranking_item, binding.rankingContainer, false)
             val txtRanking = view.findViewById<TextView>(R.id.txt_ranking)
             txtRanking.text = i.toString()
-            txtRanking.setOnClickListener { v ->
-                unselectAll()
-                v.isSelected = true
+            txtRanking.setOnClickListener { _ ->
                 currentRanking = i
                 listener?.onCurrentRankingChange(this, currentRanking)
             }
@@ -90,11 +87,9 @@ class FeedbackRankingView @JvmOverloads constructor(context: Context, attrs: Att
     }
 
     private fun unselectAll() {
-        var i = 0
         val size = binding.rankingContainer.childCount
-        while (i < size) {
-            binding.rankingContainer.getChildAt(i).findViewById<View>(R.id.txt_ranking).isSelected = false
-            i++
+        for (i in 0 until size) {
+            binding.rankingContainer.getChildAt(i).isSelected = false
         }
     }
 
