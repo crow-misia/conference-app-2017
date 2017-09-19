@@ -21,7 +21,7 @@ class LocaleUtilTest {
     fun getDisplayTimeZone() {
         // return conference timezone.
         run {
-            pref.putShowLocalTimeFlag(false)
+            pref.showLocalTimeFlag = false
             TimeZone.setDefault(testTimeZone)
 
             val timeZone = LocaleUtil.getDisplayTimeZone(RuntimeEnvironment.application)
@@ -30,7 +30,7 @@ class LocaleUtilTest {
 
         // return local timezone.
         run {
-            pref.putShowLocalTimeFlag(true)
+            pref.showLocalTimeFlag = true
             TimeZone.setDefault(testTimeZone)
 
             val timeZone = LocaleUtil.getDisplayTimeZone(RuntimeEnvironment.application)
@@ -41,7 +41,7 @@ class LocaleUtilTest {
     @Test
     @Throws(Exception::class)
     fun getDisplayDateConferenceLocalTime() {
-        pref.putShowLocalTimeFlag(false)
+        pref.showLocalTimeFlag = false
 
         val time = 1489021200000
         val inputDate = Date(time)
@@ -56,7 +56,7 @@ class LocaleUtilTest {
     @Test
     @Throws(Exception::class)
     fun getDisplayDateLocalTime() {
-        pref.putShowLocalTimeFlag(true)
+        pref.showLocalTimeFlag = true
 
         val time = 1489021200000
         val inputDate = Date(time)

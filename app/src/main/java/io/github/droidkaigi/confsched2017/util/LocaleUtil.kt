@@ -32,7 +32,7 @@ object LocaleUtil {
 
     fun setLocale(context: Context, languageId: String) {
         val config = context.resources.configuration
-        DefaultPrefs.get(context).putLanguageId(languageId)
+        DefaultPrefs.get(context).languageId = languageId
         val locale = Locale(languageId)
         Locale.setDefault(locale)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

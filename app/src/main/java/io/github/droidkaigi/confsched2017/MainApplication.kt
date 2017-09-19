@@ -89,9 +89,8 @@ open class MainApplication : Application() {
     }
 
     fun initDebot() {
-        val prefs = DefaultPrefs.get(this)
         val notificationTestTitle: String
-        if (prefs.notificationTestFlag) {
+        if (defaultPrefs.notificationTestFlag) {
             notificationTestTitle = "Notification test OFF"
         } else {
             notificationTestTitle = "Notification test ON"

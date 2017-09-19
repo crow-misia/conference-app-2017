@@ -30,29 +30,23 @@ class SettingsViewModel @Inject internal constructor(private val defaultPrefs: D
     fun getCurrentLanguage(context: Context) = LocaleUtil.getCurrentLanguage(context)
 
     val showHeadsUpSettingVisibility: Int
-        get() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                return View.VISIBLE
-            } else {
-                return View.GONE
-            }
-        }
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { View.VISIBLE } else { View.GONE }
 
     fun onCheckedHeadsUpSetting(isChecked: Boolean) {
-        defaultPrefs.putHeadsUpFlag(isChecked)
+        defaultPrefs.headsUpFlag = isChecked
     }
 
     fun onCheckedShowLocalTimeSetting(isChecked: Boolean) {
-        defaultPrefs.putShowLocalTimeFlag(isChecked)
+        defaultPrefs.showLocalTimeFlag = isChecked
     }
 
     fun onCheckedNotificationSetting(isChecked: Boolean) {
-        defaultPrefs.putNotificationFlag(isChecked)
+        defaultPrefs.notificationFlag = isChecked
         callback?.changeHeadsUpEnabled(isChecked)
     }
 
     fun onCheckedDebugOverlayView(isChecked: Boolean) {
-        defaultPrefs.putShowDebugOverlayView(isChecked)
+        defaultPrefs.showDebugOverlayView = isChecked
         callback?.debugOverlayViewEnabled(isChecked)
     }
 

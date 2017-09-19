@@ -215,8 +215,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     kapt 'com.github.gfx.android.orma:orma-processor:4.2.5'
     compile 'com.github.gfx.android.orma:orma:4.2.5'
-    compile 'com.rejasupotaro:kvs-schema:5.0.1'
-    kapt 'com.rejasupotaro:kvs-schema-compiler:5.0.1'
     compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
     kapt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
 
