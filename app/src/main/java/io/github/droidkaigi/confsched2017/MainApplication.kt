@@ -95,12 +95,12 @@ open class MainApplication : Application() {
         } else {
             notificationTestTitle = "Notification test ON"
         }
-        val builder = DebotStrategyBuilder.Builder(this)
+        val builder = DebotStrategyBuilder.Builder()
                 .registerMenu("Clear cache", clearCache)
                 .registerMenu(notificationTestTitle, notificationStrategy)
                 .registerMenu("Show splash view", showSplashStrategy)
                 .build()
-        DebotConfigurator.configureWithCustomizedMenu(this, builder.strategyList)
+        DebotConfigurator.configureWithCustomizedMenu(builder.strategyList)
     }
 
     private fun initAppShortcuts() {
