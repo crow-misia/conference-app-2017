@@ -33,7 +33,7 @@ class MySessionsFragment : BaseFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMySessionsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
 

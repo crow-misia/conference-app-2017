@@ -20,7 +20,7 @@ class SplashFragment : Fragment() {
 
     private val scheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
 
         scheduledExecutorService.scheduleAtFixedRate(

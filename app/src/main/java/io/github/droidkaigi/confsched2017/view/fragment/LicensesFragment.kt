@@ -23,7 +23,7 @@ class LicensesFragment : BaseFragment() {
         component.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentLicensesBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
 

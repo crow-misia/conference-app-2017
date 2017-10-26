@@ -50,7 +50,7 @@ class ContributorsFragment : BaseFragment(), ContributorsViewModel.Callback {
         viewModel.start()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         binding = FragmentContributorsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel

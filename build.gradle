@@ -1,11 +1,12 @@
 buildscript {
     repositories {
         jcenter()
+        google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath 'com.google.gms:google-services:3.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.cookpad.android.licensetools:license-tools-plugin:0.23.0'
@@ -17,10 +18,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url 'http://dl.bintray.com/ngsw-taro/maven' }
         maven { url 'https://jitpack.io' }
-        maven { url "https://maven.google.com" }
     }
 }

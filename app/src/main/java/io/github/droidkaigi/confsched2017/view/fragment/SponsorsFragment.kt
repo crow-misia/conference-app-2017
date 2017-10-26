@@ -40,7 +40,7 @@ class SponsorsFragment : BaseFragment() {
         viewModel.start()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSponsorsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         initView()

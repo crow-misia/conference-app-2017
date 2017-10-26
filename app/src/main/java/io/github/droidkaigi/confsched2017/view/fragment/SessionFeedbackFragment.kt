@@ -42,7 +42,7 @@ class SessionFeedbackFragment : BaseFragment(), SessionFeedbackViewModel.Callbac
         component.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSessionFeedbackBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root

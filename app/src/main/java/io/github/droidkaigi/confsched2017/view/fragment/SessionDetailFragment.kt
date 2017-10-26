@@ -74,7 +74,7 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val activity = activity
         binding = FragmentSessionDetailBinding.inflate(inflater, container, false)
         viewModel.callback = this

@@ -102,11 +102,14 @@ android {
         }
     }
 
+    flavorDimensions "core"
     productFlavors {
         develop {
+            dimension "core"
             applicationId "${packageName}.develop"
         }
         production {
+            dimension "core"
             applicationId packageName
         }
     }
@@ -184,7 +187,7 @@ dependencies {
     debugCompile "com.android.support:multidex:${multidex_version}"
 
     // Data Binding
-    kapt 'com.android.databinding:compiler:2.3.3'
+    kapt 'com.android.databinding:compiler:3.0.0'
 
     // Firebase(analytics, crash report)
     compile 'com.google.firebase:firebase-core:10.0.1'

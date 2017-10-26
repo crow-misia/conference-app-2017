@@ -62,7 +62,7 @@ class SessionsFragment : BaseFragment() {
         component.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         binding = FragmentSessionsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
