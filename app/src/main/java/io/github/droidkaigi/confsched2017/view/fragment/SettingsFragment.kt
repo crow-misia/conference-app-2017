@@ -55,14 +55,14 @@ class SettingsFragment : BaseFragment(), SettingsViewModel.Callback {
     override fun showLanguagesDialog() {
         val locales = LocaleUtil.SUPPORT_LANG
         val languages = locales
-                .map { LocaleUtil.getDisplayLanguage(context, it) }
+                .map { LocaleUtil.getDisplayLanguage(context!!, it) }
                 .toList()
 
         val languageIds = locales
                 .map { LocaleUtil.getLocaleLanguageId(it) }
                 .toList()
 
-        val currentLanguageId = LocaleUtil.getCurrentLanguageId(activity)
+        val currentLanguageId = LocaleUtil.getCurrentLanguageId(activity!!)
         Timber.tag(TAG).d("current language_id: %s", currentLanguageId)
         Timber.tag(TAG).d("languageIds: %s", languageIds.toString())
 
@@ -70,13 +70,13 @@ class SettingsFragment : BaseFragment(), SettingsViewModel.Callback {
         Timber.tag(TAG).d("current language_id index: %s", defaultItem)
 
         val items = languages.toTypedArray()
-        AlertDialog.Builder(activity, R.style.DialogTheme)
+        AlertDialog.Builder(activity!!, R.style.DialogTheme)
                 .setTitle(R.string.settings_language)
                 .setSingleChoiceItems(items, defaultItem) { dialog, which ->
                     val selectedLanguageId = languageIds[which]
                     if (currentLanguageId != selectedLanguageId) {
                         Timber.tag(TAG).d("Selected language_id: %s", selectedLanguageId)
-                        LocaleUtil.setLocale(activity, selectedLanguageId)
+                        LocaleUtil.setLocale(activity!!, selectedLanguageId)
                         dialog.dismiss()
                         restart()
                     }
@@ -89,26 +89,30 @@ class SettingsFragment : BaseFragment(), SettingsViewModel.Callback {
         if (isDetached) {
             return
         }
-        if (enabled && !SettingsUtil.canDrawOverlays(context)) {
+        if (enabled && !SettingsUtil.canDrawOverlays(context!!)) {
             Timber.tag(TAG).d("not allowed to draw views on overlay")
             binding.debugOverlayViewSwitchRow.setChecked(false)
             Toast.makeText(context, R.string.settings_debug_overlay_view_toast, Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:" + context.packageName))
+                    Uri.parse("package:" + context!!.packageName))
             startActivity(intent)
             return
         }
-        if (enabled) {
-            context.startService(context.intentFor<DebugOverlayService>())
-        } else {
-            context.stopService(context.intentFor<DebugOverlayService>())
+        context?.let {
+            if (enabled) {
+                it.startService(it.intentFor<DebugOverlayService>())
+            } else {
+                it.stopService(it.intentFor<DebugOverlayService>())
+            }
         }
     }
 
     private fun restart() {
-        activity.finish()
-        startActivity(MainActivity.createIntent(activity))
-        activity.overridePendingTransition(0, 0)
+        activity?.let {
+            it.finish()
+            startActivity(MainActivity.createIntent(it))
+            it.overridePendingTransition(0, 0)
+        }
     }
 
     companion object {

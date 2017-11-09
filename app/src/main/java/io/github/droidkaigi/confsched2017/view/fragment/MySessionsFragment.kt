@@ -44,7 +44,7 @@ class MySessionsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.start(context)
+        context?.let { viewModel.start(it) }
     }
 
     override fun onDestroy() {

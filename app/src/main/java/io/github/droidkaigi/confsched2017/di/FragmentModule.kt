@@ -10,5 +10,5 @@ import dagger.Provides
 class FragmentModule(internal val fragment: Fragment) {
 
     @Provides
-    fun provideFragmentManager(): FragmentManager = fragment.fragmentManager
+    fun provideFragmentManager() = fragment.fragmentManager
 }

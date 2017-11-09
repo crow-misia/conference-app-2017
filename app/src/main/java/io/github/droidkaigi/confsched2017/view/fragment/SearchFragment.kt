@@ -114,7 +114,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
     }
 
     private fun initRecyclerView() {
-        adapter = SearchResultsAdapter(context)
+        adapter = SearchResultsAdapter(context!!)
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -122,7 +122,7 @@ class SearchFragment : BaseFragment(), SearchViewModel.Callback {
     }
 
     private fun loadData() {
-        viewModel.getSearchResultViewModels(context)
+        viewModel.getSearchResultViewModels(context!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

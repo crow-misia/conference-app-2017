@@ -143,7 +143,7 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
             actionTextId = R.string.session_check
         }
         val typedValue = TypedValue()
-        activity.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+        activity?.theme?.resolveAttribute(R.attr.colorPrimary, typedValue, true)
         val actionTextColor = typedValue.data
         Snackbar.make(binding.fab, textId, Snackbar.LENGTH_SHORT)
                 .setAction(actionTextId) { _ -> binding.fab.performClick() }
@@ -152,8 +152,10 @@ class SessionDetailFragment : BaseFragment(), SessionDetailViewModel.Callback {
     }
 
     override fun onOverScroll() {
-        activity.finish()
-        activity.overridePendingTransition(0, 0)
+        activity?.also {
+            it.finish()
+            it.overridePendingTransition(0, 0)
+        }
     }
 
     companion object {

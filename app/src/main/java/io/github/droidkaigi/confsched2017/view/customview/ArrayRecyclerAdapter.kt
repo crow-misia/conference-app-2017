@@ -4,8 +4,6 @@ import android.content.Context
 import android.support.annotation.UiThread
 import android.support.v7.widget.RecyclerView
 
-import java.util.ArrayList
-
 abstract class ArrayRecyclerAdapter<T, VH : RecyclerView.ViewHolder> @JvmOverloads constructor(val context: Context, protected val list: MutableList<T> = arrayListOf()) : RecyclerView.Adapter<VH>() {
 
     @UiThread

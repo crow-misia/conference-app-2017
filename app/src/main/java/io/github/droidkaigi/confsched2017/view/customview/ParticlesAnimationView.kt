@@ -110,7 +110,7 @@ class ParticlesAnimationView @JvmOverloads constructor(context: Context, attrs: 
      * *
      * @param second the second object in the pair
      */
-    internal constructor(first: Particle, second: Particle) : Pair<Particle, Particle>(first, second) {
+    internal constructor(private val first: Particle, private val second: Particle) {
 
         internal fun draw(canvas: Canvas, paint: Paint) {
             if (!first.shouldBeLinked(LINK_HEXAGON_DISTANCE, second)) {

@@ -78,8 +78,8 @@ class SessionsFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_search -> startActivity(SearchActivity.createIntent(activity))
-            R.id.item_my_sessions -> startActivity(MySessionsActivity.createIntent(activity))
+            R.id.item_search -> activity?.let { startActivity(SearchActivity.createIntent(it)) }
+            R.id.item_my_sessions -> activity?.let { startActivity(MySessionsActivity.createIntent(it)) }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -102,14 +102,16 @@ class SessionsFragment : BaseFragment() {
 
     private val screenWidth: Int
         get() {
-            val display = activity.windowManager.defaultDisplay
             val size = Point()
-            display.getSize(size)
+            activity?.let {
+                val display = it.windowManager.defaultDisplay
+                display.getSize(size)
+            }
             return size.x
         }
 
     private fun showSessions() {
-        viewModel.getSessions(Locale.getDefault(), context)
+        viewModel.getSessions(Locale.getDefault(), context!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -131,10 +133,10 @@ class SessionsFragment : BaseFragment() {
         val divider = ResourcesCompat.getDrawable(resources, R.drawable.divider, null)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(divider))
 
-        adapter = SessionsAdapter(context)
+        adapter = SessionsAdapter(context!!)
         binding.recyclerView.adapter = adapter
 
-        val clickCanceller = ClickGestureCanceller(context, binding.recyclerView)
+        val clickCanceller = ClickGestureCanceller(context!!, binding.recyclerView)
 
         binding.root.setOnTouchListener { _, event ->
             clickCanceller.sendCancelIfScrolling(event)

@@ -221,8 +221,8 @@ object DataBindingHelper {
         val icon = ContextCompat.getDrawable(context, iconResId)
         val checkMark = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_24_vector)
         val size = context.resources.getDimensionPixelSize(R.dimen.text_drawable_12dp)
-        checkMark.setBounds(0, 0, size, size)
-        icon.setBounds(0, 0, size, size)
+        checkMark?.setBounds(0, 0, size, size)
+        icon?.setBounds(0, 0, size, size)
         textView.setCompoundDrawables(icon, null, if (isMySession) checkMark else null, null)
     }
 }

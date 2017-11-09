@@ -10,7 +10,7 @@ import timber.log.Timber
  * Created by KeishinYokomaku on 2017/01/18.
  */
 class CrashLogTree : Timber.Tree() {
-    override fun log(priority: Int, tag: String?, message: String?, t: Throwable?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.VERBOSE || priority == Log.DEBUG) {
             FirebaseCrash.log((if (priority == Log.DEBUG) "[debug] " else "[verbose] ") + tag + ": " + message)
             return

@@ -73,7 +73,7 @@ class ContributorsFragment : BaseFragment(), ContributorsViewModel.Callback {
 
 
     private fun initView() {
-        adapter = Adapter(context, viewModel.contributorViewModels)
+        adapter = Adapter(context!!, viewModel.contributorViewModels)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(context, columnCount)
     }
@@ -86,7 +86,7 @@ class ContributorsFragment : BaseFragment(), ContributorsViewModel.Callback {
     override fun showError(@StringRes textRes: Int) {
         Snackbar.make(binding.root, textRes, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry) { _ -> viewModel.retry() }
-                .setActionTextColor(ContextCompat.getColor(activity, R.color.white))
+                .setActionTextColor(ContextCompat.getColor(activity!!, R.color.white))
                 .show()
     }
 

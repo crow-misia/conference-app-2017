@@ -53,7 +53,7 @@ class SponsorsFragment : BaseFragment() {
     }
 
     private fun initView() {
-        val adapter = SponsorshipsAdapter(context, viewModel.sponsorShipViewModels)
+        val adapter = SponsorshipsAdapter(context!!, viewModel.sponsorShipViewModels)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         binding.recyclerView.layoutManager = LinearLayoutManager(context)

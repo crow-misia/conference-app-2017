@@ -13,7 +13,7 @@ import io.reactivex.subjects.PublishSubject
 class LogEmitter @Inject constructor() {
     private val subject = PublishSubject.create<OverlayLog>()
 
-    fun log(priority: Int, tag: String?, message: String?) = subject.onNext(OverlayLog(priority, tag, message))
+    fun log(priority: Int, tag: String?, message: String) = subject.onNext(OverlayLog(priority, tag, message))
 
     fun listen(): Observable<OverlayLog> = subject
 }
