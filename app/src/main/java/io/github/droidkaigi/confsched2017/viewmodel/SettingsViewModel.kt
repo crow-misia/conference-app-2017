@@ -4,24 +4,23 @@ import android.content.Context
 import android.databinding.BaseObservable
 import android.os.Build
 import android.view.View
+import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
 
+import io.github.droidkaigi.confsched2017.util.LocaleUtil
 import javax.inject.Inject
 
-import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
-import io.github.droidkaigi.confsched2017.util.LocaleUtil
-
-class SettingsViewModel @Inject internal constructor(private val defaultPrefs: DefaultPrefs) : BaseObservable(), ViewModel {
+class SettingsViewModel @Inject internal constructor() : BaseObservable(), ViewModel {
 
     var callback: Callback? = null
 
-    fun shouldNotify(): Boolean = defaultPrefs.notificationFlag
+    fun shouldNotify(): Boolean = DefaultPrefs.notificationFlag
 
     val isHeadsUp: Boolean
-        get() = defaultPrefs.headsUpFlag
+        get() = DefaultPrefs.headsUpFlag
 
-    fun shouldShowLocalTime(): Boolean = defaultPrefs.showLocalTimeFlag
+    fun shouldShowLocalTime(): Boolean = DefaultPrefs.showLocalTimeFlag
 
-    fun useDebugOverlayView(): Boolean = defaultPrefs.showDebugOverlayView
+    fun useDebugOverlayView(): Boolean = DefaultPrefs.showDebugOverlayView
 
     fun onClickLanguage(view: View) {
         callback?.showLanguagesDialog()
@@ -33,20 +32,20 @@ class SettingsViewModel @Inject internal constructor(private val defaultPrefs: D
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { View.VISIBLE } else { View.GONE }
 
     fun onCheckedHeadsUpSetting(isChecked: Boolean) {
-        defaultPrefs.headsUpFlag = isChecked
+        DefaultPrefs.headsUpFlag = isChecked
     }
 
     fun onCheckedShowLocalTimeSetting(isChecked: Boolean) {
-        defaultPrefs.showLocalTimeFlag = isChecked
+        DefaultPrefs.showLocalTimeFlag = isChecked
     }
 
     fun onCheckedNotificationSetting(isChecked: Boolean) {
-        defaultPrefs.notificationFlag = isChecked
+        DefaultPrefs.notificationFlag = isChecked
         callback?.changeHeadsUpEnabled(isChecked)
     }
 
     fun onCheckedDebugOverlayView(isChecked: Boolean) {
-        defaultPrefs.showDebugOverlayView = isChecked
+        DefaultPrefs.showDebugOverlayView = isChecked
         callback?.debugOverlayViewEnabled(isChecked)
     }
 

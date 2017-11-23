@@ -14,26 +14,24 @@ class LocaleUtilTest {
 
     val testTimeZone = TimeZone.getTimeZone("Pacific/Guam") // UTC+10
 
-    val pref = DefaultPrefs.get(RuntimeEnvironment.application.applicationContext)
-
     @Test
     @Throws(Exception::class)
     fun getDisplayTimeZone() {
         // return conference timezone.
         run {
-            pref.showLocalTimeFlag = false
+            DefaultPrefs.showLocalTimeFlag = false
             TimeZone.setDefault(testTimeZone)
 
-            val timeZone = LocaleUtil.getDisplayTimeZone(RuntimeEnvironment.application)
+            val timeZone = LocaleUtil.getDisplayTimeZone()
             assertThat(timeZone).isEqualTo(TimeZone.getTimeZone(BuildConfig.CONFERENCE_TIMEZONE))
         }
 
         // return local timezone.
         run {
-            pref.showLocalTimeFlag = true
+            DefaultPrefs.showLocalTimeFlag = true
             TimeZone.setDefault(testTimeZone)
 
-            val timeZone = LocaleUtil.getDisplayTimeZone(RuntimeEnvironment.application)
+            val timeZone = LocaleUtil.getDisplayTimeZone()
             assertThat(timeZone).isEqualTo(testTimeZone)
         }
     }
@@ -41,13 +39,13 @@ class LocaleUtilTest {
     @Test
     @Throws(Exception::class)
     fun getDisplayDateConferenceLocalTime() {
-        pref.showLocalTimeFlag = false
+        DefaultPrefs.showLocalTimeFlag = false
 
         val time = 1489021200000
         val inputDate = Date(time)
         TimeZone.setDefault(testTimeZone)
 
-        val resultDate = LocaleUtil.getDisplayDate(inputDate, RuntimeEnvironment.application)
+        val resultDate = LocaleUtil.getDisplayDate(inputDate)
 
         assertThat(inputDate.time).isEqualTo(time)
         assertThat(resultDate.time).isEqualTo(time)
@@ -56,13 +54,13 @@ class LocaleUtilTest {
     @Test
     @Throws(Exception::class)
     fun getDisplayDateLocalTime() {
-        pref.showLocalTimeFlag = true
+        DefaultPrefs.showLocalTimeFlag = true
 
         val time = 1489021200000
         val inputDate = Date(time)
         TimeZone.setDefault(testTimeZone)
 
-        val resultDate = LocaleUtil.getDisplayDate(inputDate, RuntimeEnvironment.application)
+        val resultDate = LocaleUtil.getDisplayDate(inputDate)
 
         assertThat(inputDate.time).isEqualTo(time)
         assertThat(resultDate.time).isEqualTo(time - (60L * 60L * 1000L))

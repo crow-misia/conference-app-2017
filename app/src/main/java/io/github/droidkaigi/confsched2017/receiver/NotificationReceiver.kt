@@ -20,15 +20,14 @@ import timber.log.Timber
 class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val prefs = DefaultPrefs.get(context)
-        if (!prefs.notificationFlag) {
+        if (!DefaultPrefs.notificationFlag) {
             Timber.tag(TAG).v("Notification is disabled.")
             return
         }
 
         showGroupNotification(context)
 
-        showChildNotification(context, intent, prefs.headsUpFlag)
+        showChildNotification(context, intent, DefaultPrefs.headsUpFlag)
     }
 
     /**

@@ -167,8 +167,8 @@ class SessionDetailViewModel @Inject constructor(
     }
 
     private fun decideSessionTimeRange(context: Context, session: Session): String {
-        val displaySTime = LocaleUtil.getDisplayDate(session.stime, context)
-        val displayETime = LocaleUtil.getDisplayDate(session.etime, context)
+        val displaySTime = LocaleUtil.getDisplayDate(session.stime)
+        val displayETime = LocaleUtil.getDisplayDate(session.etime)
 
         return context.getString(R.string.session_time_range,
                 DateUtil.getLongFormatDate(displaySTime),

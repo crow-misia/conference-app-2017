@@ -189,7 +189,7 @@ dependencies {
     debugImplementation "com.android.support:multidex:${multidex_version}"
 
     // Data Binding
-    kapt 'com.android.databinding:compiler:3.0.0'
+    kapt 'com.android.databinding:compiler:3.0.1'
 
     // Firebase(analytics, crash report)
     implementation 'com.google.firebase:firebase-core:11.6.0'
@@ -222,6 +222,7 @@ dependencies {
     implementation 'com.github.gfx.android.orma:orma:4.2.5'
     implementation 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
     kapt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
+    implementation 'com.chibatching.kotpref:kotpref:2.2.0'
 
     // UI
     implementation 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'

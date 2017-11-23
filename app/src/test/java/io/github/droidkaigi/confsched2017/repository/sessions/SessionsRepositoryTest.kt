@@ -1,5 +1,6 @@
 package io.github.droidkaigi.confsched2017.repository.sessions
 
+import com.github.gfx.android.orma.AccessThreadConstraint
 import com.nhaarman.mockito_kotlin.*
 import io.github.droidkaigi.confsched2017.api.DroidKaigiClient
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
@@ -20,6 +21,7 @@ class SessionsRepositoryTest {
     fun createOrmaDatabase(): OrmaDatabase {
         return OrmaDatabase.builder(RuntimeEnvironment.application)
                 .name(null)
+                .writeOnMainThread(AccessThreadConstraint.WARNING)
                 .build()
     }
 

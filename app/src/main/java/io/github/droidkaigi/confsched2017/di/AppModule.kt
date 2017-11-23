@@ -18,7 +18,6 @@ import io.github.droidkaigi.confsched2017.api.service.DroidKaigiService
 import io.github.droidkaigi.confsched2017.api.service.GithubService
 import io.github.droidkaigi.confsched2017.api.service.GoogleFormService
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
-import io.github.droidkaigi.confsched2017.pref.DefaultPrefs
 import io.github.droidkaigi.confsched2017.util.create
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.Interceptor
@@ -38,9 +37,6 @@ class AppModule(private val app: Application) {
 
     @Provides
     fun provideCompositeDisposable() = CompositeDisposable()
-
-    @Provides
-    fun provideDefaultPrefs(context: Context): DefaultPrefs = DefaultPrefs.get(context)
 
     @Singleton
     @Provides

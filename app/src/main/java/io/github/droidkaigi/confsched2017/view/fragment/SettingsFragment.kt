@@ -62,7 +62,7 @@ class SettingsFragment : BaseFragment(), SettingsViewModel.Callback {
                 .map { LocaleUtil.getLocaleLanguageId(it) }
                 .toList()
 
-        val currentLanguageId = LocaleUtil.getCurrentLanguageId(activity!!)
+        val currentLanguageId = LocaleUtil.getCurrentLanguageId()
         Timber.tag(TAG).d("current language_id: %s", currentLanguageId)
         Timber.tag(TAG).d("languageIds: %s", languageIds.toString())
 

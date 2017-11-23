@@ -19,8 +19,7 @@ object AlarmUtil {
     fun registerAlarm(context: Context, session: Session) {
         var time = session.stime.time - REMIND_DURATION_MINUTES_FOR_START
 
-        val prefs = DefaultPrefs.get(context)
-        if (prefs.notificationTestFlag) {
+        if (DefaultPrefs.notificationTestFlag) {
             time = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(5)
         }
 
@@ -41,8 +40,8 @@ object AlarmUtil {
 
     private fun createAlarmIntent(context: Context, session: Session): PendingIntent {
         val title = context.getString(R.string.notification_title, session.title)
-        val displaySTime = LocaleUtil.getDisplayDate(session.stime, context)
-        val displayETime = LocaleUtil.getDisplayDate(session.etime, context)
+        val displaySTime = LocaleUtil.getDisplayDate(session.stime)
+        val displayETime = LocaleUtil.getDisplayDate(session.etime)
         val room = session.room?.name ?: ""
         val text = context.getString(R.string.notification_message,
                 DateUtil.getHourMinute(displaySTime),

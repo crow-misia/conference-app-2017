@@ -1,35 +1,19 @@
 package io.github.droidkaigi.confsched2017.pref
 
-import android.content.Context
+import com.chibatching.kotpref.KotprefModel
 
-class DefaultPrefs private constructor(context: Context) {
-    private val prefs = context.getSharedPreferences("io.github.droidkaigi.confsched_preferences", Context.MODE_PRIVATE)
+object DefaultPrefs : KotprefModel() {
+    override val kotprefName = "io.github.droidkaigi.confsched_preferences"
 
-    var languageId = ""
-        get() = prefs.getString("current_language_id", field)
-        set(value) = prefs.edit().putString("current_language_id", value).apply()
+    var languageId by stringPref("", "current_language_id")
 
-    var notificationFlag = true
-        get() = prefs.getBoolean("notification_setting", field)
-        set(value) = prefs.edit().putBoolean("notification_setting", value).apply()
+    var notificationFlag by booleanPref(true, "notification_setting")
 
-    var headsUpFlag = true
-        get() = prefs.getBoolean("heads_up_setting", field)
-        set(value) = prefs.edit().putBoolean("heads_up_setting", value).apply()
+    var headsUpFlag by booleanPref(true, "heads_up_setting")
 
-    var showLocalTimeFlag = false
-        get() = prefs.getBoolean("show_local_time", field)
-        set(value) = prefs.edit().putBoolean("show_local_time", value).apply()
+    var showLocalTimeFlag by booleanPref(false, "show_local_time")
 
-    var notificationTestFlag = false
-        get() = prefs.getBoolean("notification_test_setting", field)
-        set(value) = prefs.edit().putBoolean("notification_test_setting", value).apply()
+    var notificationTestFlag by booleanPref(false, "notification_test_setting")
 
-    var showDebugOverlayView = false
-        get() = prefs.getBoolean("show_debug_overlay_view", field)
-        set(value) = prefs.edit().putBoolean("show_debug_overlay_view", value).apply()
-
-    companion object {
-        fun get(context: Context) = DefaultPrefs(context)
-    }
+    var showDebugOverlayView by booleanPref(false, "show_debug_overlay_view")
 }

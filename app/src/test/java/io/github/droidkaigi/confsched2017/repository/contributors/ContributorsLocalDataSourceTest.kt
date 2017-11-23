@@ -1,5 +1,6 @@
 package io.github.droidkaigi.confsched2017.repository.contributors
 
+import com.github.gfx.android.orma.AccessThreadConstraint
 import com.taroid.knit.should
 import io.github.droidkaigi.confsched2017.model.Contributor
 import io.github.droidkaigi.confsched2017.model.OrmaDatabase
@@ -26,7 +27,7 @@ class ContributorsLocalDataSourceTest {
 
     @Before
     fun setUp() {
-        ormaDatabase = OrmaDatabase.builder(RuntimeEnvironment.application).name(null).build()
+        ormaDatabase = OrmaDatabase.builder(RuntimeEnvironment.application).name(null).writeOnMainThread(AccessThreadConstraint.NONE).build()
     }
 
     @Test

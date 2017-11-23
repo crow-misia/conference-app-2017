@@ -6,8 +6,8 @@ import com.tomoima.debot.DebotConfigurator
 import com.tomoima.debot.DebotStrategyBuilder
 
 import android.app.Application
-import android.content.Intent
 import android.os.Build
+import com.chibatching.kotpref.Kotpref
 
 import javax.inject.Inject
 
@@ -43,13 +43,12 @@ open class MainApplication : Application() {
     lateinit var showSplashStrategy: ShowSplashStrategy
 
     @Inject
-    lateinit var defaultPrefs: DefaultPrefs
-
-    @Inject
     lateinit var emitter: LogEmitter
 
     override fun onCreate() {
         super.onCreate()
+
+        Kotpref.init(this)
 
         component = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
@@ -67,7 +66,7 @@ open class MainApplication : Application() {
         Timber.plant(OverlayLogTree(emitter))
         LocaleUtil.initLocale(this)
 
-        if (defaultPrefs.showDebugOverlayView) {
+        if (DefaultPrefs.showDebugOverlayView) {
             startService(intentFor<DebugOverlayService>())
         }
         initDebot()
@@ -89,11 +88,10 @@ open class MainApplication : Application() {
     }
 
     fun initDebot() {
-        val notificationTestTitle: String
-        if (defaultPrefs.notificationTestFlag) {
-            notificationTestTitle = "Notification test OFF"
+        val notificationTestTitle = if (!DefaultPrefs.notificationTestFlag) {
+            "Notification test ON"
         } else {
-            notificationTestTitle = "Notification test ON"
+            "Notification test OFF"
         }
         val builder = DebotStrategyBuilder.Builder()
                 .registerMenu("Clear cache", clearCache)
